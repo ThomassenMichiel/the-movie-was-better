@@ -39,7 +39,17 @@ public class BookRepository {
 
         if (params.containsKey("title")) {
             bookStream = bookStream
-                    .filter(book -> book.getTitle().matches(".*" + params.get("title") + ".*"));
+                    .filter(book -> book.getTitle().matches("(?i).*" + params.get("title") + ".*"));
+        }
+
+        if (params.containsKey("firstName")) {
+            bookStream = bookStream
+                    .filter(book -> book.getAuthorFirstName().matches("(?i).*" + params.get("firstName") + ".*"));
+        }
+
+        if (params.containsKey("lastName")) {
+            bookStream = bookStream
+                    .filter(book -> book.getAuthorLastName().matches("(?i).*" + params.get("lastName") + ".*"));
         }
 
 

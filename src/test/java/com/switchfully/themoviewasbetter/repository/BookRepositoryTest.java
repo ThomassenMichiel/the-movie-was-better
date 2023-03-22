@@ -139,7 +139,6 @@ class BookRepositoryTest {
     @Test
     @DisplayName("Get all books - by title - check nonexistent book")
     void getAllBooks_byTitle_nonexistentBook() {
-
         HashMap<String, String> params = new HashMap<>();
         params.put("title", "Lord");
 
@@ -147,4 +146,137 @@ class BookRepositoryTest {
 
         assertThat(answer).isEmpty();
     }
+
+    @Test
+    @DisplayName("Get all books - by title - case insensitive")
+    void getAllBooks_byTitle_caseInsensitive() {
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("title", "HaRrY pOtTeR aNd ThE");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).containsExactlyInAnyOrder(harryPotter, harryPotter2,harryPotter3);
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - first name")
+    void getAllBooks_byAuthor_firstName() {
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("firstName", "J.K.");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).hasSize(3).containsExactlyInAnyOrder(harryPotter,harryPotter2,harryPotter3);
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - first name - wildcard")
+    void getAllBooks_byAuthor_firstName_wildcard() {
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("firstName", "K.");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).hasSize(3).containsExactlyInAnyOrder(harryPotter,harryPotter2,harryPotter3);
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - first name - non existent first name")
+    void getAllBooks_byAuthor_firstName_nonexistentFirstName() {
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("firstName", "Fyodor");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - first name - case insensitive")
+    void getAllBooks_byAuthor_firstname_caseInsensitiveLastName() {
+
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("firstName", "j.k.");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).hasSize(3).containsExactlyInAnyOrder(harryPotter,harryPotter2,harryPotter3);
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - last name")
+    void getAllBooks_byAuthor_lastname() {
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("lastName", "Rowling");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).hasSize(3).containsExactlyInAnyOrder(harryPotter,harryPotter2,harryPotter3);
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - last name - wildcard")
+    void getAllBooks_byAuthor_lastname_wildcard() {
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("lastName", "ling");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).hasSize(3).containsExactlyInAnyOrder(harryPotter,harryPotter2,harryPotter3);
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - last name - non existent first name")
+    void getAllBooks_byAuthor_lastname_nonexistentLastname() {
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("lastName", "Dostoyevsky");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Get all books - by author - last name - case insensitive")
+    void getAllBooks_byAuthor_lastname_caseInsensitiveLastName() {
+
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("lastName", "ROwLiNG");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).hasSize(3).containsExactlyInAnyOrder(harryPotter,harryPotter2,harryPotter3);
+    }
+    
+    
 }
