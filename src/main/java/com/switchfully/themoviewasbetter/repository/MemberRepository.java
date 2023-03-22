@@ -7,15 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 @Repository
 public class MemberRepository {
 
-    private final HashMap<String, Member> membersById = new HashMap<>();
+    private final HashMap<String, Member> repository = new HashMap<>();
 
     public MemberRepository() {
-        this.membersById.put("0", putAdminMain());
+        this.repository.put("pieter.pauwels13@gmail.com", putAdminMain());
     }
 
     private static Member putAdminMain() {
@@ -26,11 +25,11 @@ public class MemberRepository {
     }
 
     public Collection<Member> getAllUsers() {
-        return membersById.values();
+        return repository.values();
     }
 
     public Member registerMember(Member user) {
-        membersById.put(user.getId(), user);
+        repository.put(user.getId(), user);
         return user;
 
     }
@@ -45,7 +44,7 @@ public class MemberRepository {
 
 
     public Member getMember(String id) {
-        return membersById.get(id);
+        return repository.get(id);
     }
 
 
