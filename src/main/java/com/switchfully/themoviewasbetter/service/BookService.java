@@ -21,4 +21,8 @@ public class BookService {
     public List<BookDTO> getAllBooks() {
         return bookRepository.getAllBooks().stream().map(mapper::toDto).collect(Collectors.toList());
     }
+
+    public BookDTO findByIsbn(String isbn){
+        return mapper.toDto(bookRepository.findByIsbn(isbn));
+    }
 }

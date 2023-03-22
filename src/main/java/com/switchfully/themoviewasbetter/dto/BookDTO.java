@@ -7,6 +7,7 @@ public class BookDTO {
     private String title;
     private String authorFirstName;
     private String authorLastName;
+    private String smallSummary;
 
     public BookDTO(String isbn, String title, String authorFirstName, String authorLastName, String smallSummary) {
         this.isbn = isbn;
@@ -30,6 +31,10 @@ public class BookDTO {
 
     public String getAuthorLastName() {
         return authorLastName;
+    }
+
+    public String getSmallSummary() {
+        return smallSummary;
     }
 
     @Override

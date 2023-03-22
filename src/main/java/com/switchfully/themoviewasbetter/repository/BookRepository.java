@@ -1,6 +1,8 @@
 package com.switchfully.themoviewasbetter.repository;
 
 import com.switchfully.themoviewasbetter.domain.Book;
+import com.switchfully.themoviewasbetter.dto.BookDTO;
+import org.assertj.core.util.VisibleForTesting;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -24,5 +26,9 @@ public class BookRepository {
 
     public List<Book> getAllBooks() {
         return repository.values().stream().toList();
+    }
+
+    public Book findByIsbn(String isbn) {
+        return  repository.get(isbn);
     }
 }
