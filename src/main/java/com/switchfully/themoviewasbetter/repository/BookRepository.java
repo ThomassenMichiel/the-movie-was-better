@@ -25,7 +25,10 @@ public class BookRepository {
         repository.put(harryPotter2.getIsbn(), harryPotter2);
         Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban", "J.K.", "Rowling", "Harry's been naughty");
         repository.put(harryPotter3.getIsbn(), harryPotter3);
-
+        Book fellowShipOfTheRing = new Book("9780345339706", "Lord of the Rings: Fellowship of the Ring", "J.R.R.", "Tolkien", "they're taking hobbits to isengard");
+        repository.put(fellowShipOfTheRing.getIsbn(), fellowShipOfTheRing);
+        Book theComingStorm = new Book("9781423100188", "The Coming Storm (Pirates of the Caribbean: Jack Sparrow, No. 1)", "Rob", "Kidd", "I've got a jar of dirt");
+        repository.put(theComingStorm.getIsbn(), theComingStorm);
     }
 
     public List<Book> getAllBooks(Map<String, String> params) {
@@ -39,7 +42,17 @@ public class BookRepository {
 
         if (params.containsKey("title")) {
             bookStream = bookStream
-                    .filter(book -> book.getTitle().matches(".*" + params.get("title") + ".*"));
+                    .filter(book -> book.getTitle().matches("(?i).*" + params.get("title") + ".*"));
+        }
+
+        if (params.containsKey("firstName")) {
+            bookStream = bookStream
+                    .filter(book -> book.getAuthorFirstName().matches("(?i).*" + params.get("firstName") + ".*"));
+        }
+
+        if (params.containsKey("lastName")) {
+            bookStream = bookStream
+                    .filter(book -> book.getAuthorLastName().matches("(?i).*" + params.get("lastName") + ".*"));
         }
 
 
