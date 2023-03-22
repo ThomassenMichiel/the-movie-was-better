@@ -30,9 +30,9 @@ class BookControllerTest {
     @Test
     @DisplayName("Get all books")
     void getAllBooks() {
-        Book harryPotter = new Book("978-0-7475-3269-9", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
-        Book harryPotter2 = new Book("0-7475-3849-2", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
-        Book harryPotter3 = new Book("0-7475-4215-5", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
 
         List<BookDTO> answer = controller.getAllBooks();
 
@@ -55,9 +55,9 @@ class BookControllerTest {
 
     public static Stream<Arguments> findByIsbn() {
         return Stream.of(
-                Arguments.of("978-0-7475-3269-9", new BookDTO("978-0-7475-3269-9", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet")),
-                Arguments.of("0-7475-3849-2", new BookDTO("0-7475-3849-2", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened")),
-                Arguments.of("0-7475-4215-5", new BookDTO("0-7475-4215-5", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty"))
+                Arguments.of("9780747532699", new BookDTO("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet")),
+                Arguments.of("0747538492", new BookDTO("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened")),
+                Arguments.of("0747542155", new BookDTO("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty"))
         );
     }
 }
