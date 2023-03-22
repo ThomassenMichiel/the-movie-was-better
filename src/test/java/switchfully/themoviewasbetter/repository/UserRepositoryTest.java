@@ -2,6 +2,7 @@ package switchfully.themoviewasbetter.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.switchfully.themoviewasbetter.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
