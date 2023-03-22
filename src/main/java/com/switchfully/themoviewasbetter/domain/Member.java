@@ -1,8 +1,10 @@
 package switchfully.themoviewasbetter.domain;
 
+import com.switchfully.themoviewasbetter.security.Role;
+
 import java.util.Objects;
 
-public class User {
+public class Member {
 
     private String id;
     private String INSS; //unique
@@ -13,9 +15,12 @@ public class User {
     private String nr;
     private String postcode;
     private String city; // not null
+    private String password;
+    private Role role;
 
 
-    public User(String id, String INSS, String email, String lastname, String firstname, String streetName, String nr, String postcode, String city) {
+    public Member(String id, String INSS, String email, String lastname, String firstname, String streetName,
+                  String nr, String postcode, String city, String password) {
         this.id = id;
         this.INSS = INSS;
         this.email = email;
@@ -25,85 +30,107 @@ public class User {
         this.nr = nr;
         this.postcode = postcode;
         this.city = city;
+        this.password = password;
+        this.role = Role.MEMBER;
     }
 
+    // Getters3
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getINSS() {
         return INSS;
     }
 
-    public void setINSS(String INSS) {
-        this.INSS = INSS;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getFirstname() {
         return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
     }
 
     public String getStreetName() {
         return streetName;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
     public String getNr() {
         return nr;
-    }
-
-    public void setNr(String nr) {
-        this.nr = nr;
     }
 
     public String getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
     public String getCity() {
         return city;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    // Setters
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setINSS(String INSS) {
+        this.INSS = INSS;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public void setNr(String nr) {
+        this.nr = nr;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
     public void setCity(String city) {
         this.city = city;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        switchfully.themoviewasbetter.domain.Member user = (switchfully.themoviewasbetter.domain.Member) o;
         return Objects.equals(INSS, user.INSS) && Objects.equals(email, user.email);
     }
 

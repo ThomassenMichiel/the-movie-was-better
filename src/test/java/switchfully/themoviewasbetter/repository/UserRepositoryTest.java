@@ -1,35 +1,32 @@
 package switchfully.themoviewasbetter.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.switchfully.themoviewasbetter.repository.UserRepository;
+import com.switchfully.themoviewasbetter.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switchfully.themoviewasbetter.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class UserRepositoryTest {
 
-    private UserRepository repository;
-    private List<User> users = new ArrayList<>();
+    private MemberRepository repository;
+    private List<switchfully.themoviewasbetter.domain.Member> users = new ArrayList<>();
 
     @BeforeEach
     void beforeEach() {
-        var user1 = new User("1", "123", "sven@gmail.com"
+        var user1 = new switchfully.themoviewasbetter.domain.Member("1", "123", "sven@gmail.com"
                 , "Van Gastel", "Sven", "molenstraat",
-                "28", "2920", "Kalmthout");
+                "28", "2920", "Kalmthout", "passwoordTest");
 
-        var user2 = new User("2", "125", "sven@gmail.com"
+        var user2 = new switchfully.themoviewasbetter.domain.Member("2", "125", "sven@gmail.com"
                 , "Van Gast", "erik", "molenbaan",
-                "3", "2000", "Antwerrpen");
+                "3", "2000", "Antwerrpen","passwoordTest");
 
         users.add(user1);
         users.add(user2);
 
-        repository = new UserRepository(users);
+        //repository = new MemberRepository(users);
     }
 
     @Test

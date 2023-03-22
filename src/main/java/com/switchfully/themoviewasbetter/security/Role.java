@@ -1,10 +1,9 @@
-package com.switchfully.themoviewasbetter.repository;
+package com.switchfully.themoviewasbetter.security;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.switchfully.themoviewasbetter.repository.Feature.*;
+import static com.switchfully.themoviewasbetter.security.Feature.*;
 
 public enum Role {
     ADMIN(newArrayList(REGISTER_ADMIN)),
