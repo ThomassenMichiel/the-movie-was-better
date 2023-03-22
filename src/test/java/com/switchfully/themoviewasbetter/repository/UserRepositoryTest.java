@@ -1,4 +1,4 @@
-package switchfully.themoviewasbetter.repository;
+package com.switchfully.themoviewasbetter.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switchfully.themoviewasbetter.domain.User;
+import switchfully.themoviewasbetter.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
