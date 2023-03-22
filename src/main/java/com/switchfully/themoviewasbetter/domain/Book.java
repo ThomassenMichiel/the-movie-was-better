@@ -7,15 +7,17 @@ public class Book {
     private String title;
     private String authorFirstName;
     private String authorLastName;
+    private String smallSummary;
 
     public Book() {
     }
 
-    public Book(String isbn, String title, String authorFirstName, String authorLastName) {
+    public Book(String isbn, String title, String authorFirstName, String authorLastName, String smallSummary) {
         this.isbn = isbn;
         this.title = title;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
+        this.smallSummary = smallSummary;
     }
 
     public String getIsbn() {
@@ -32,6 +34,10 @@ public class Book {
 
     public String getAuthorLastName() {
         return authorLastName;
+    }
+
+    public String getSmallSummary() {
+        return smallSummary;
     }
 
     @Override
