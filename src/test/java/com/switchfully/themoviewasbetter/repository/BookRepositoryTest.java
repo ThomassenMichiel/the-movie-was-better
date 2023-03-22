@@ -121,4 +121,30 @@ class BookRepositoryTest {
                 .isInstanceOf(InvalidISBNException.class);
 
     }
+
+    @Test
+    @DisplayName("Get all books - by title - with wildcards")
+    void getAllBooks_byTitle_withWildcards() {
+        Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban", "J.K.", "Rowling", "Harry's been naughty");
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("title", "Harry Potter and the P");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).hasSize(2).containsExactlyInAnyOrder(harryPotter, harryPotter3);
+    }
+
+    @Test
+    @DisplayName("Get all books - by title - check nonexistent book")
+    void getAllBooks_byTitle_nonexistentBook() {
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("title", "Lord");
+
+        List<Book> answer = bookRepository.getAllBooks(params);
+
+        assertThat(answer).isEmpty();
+    }
 }

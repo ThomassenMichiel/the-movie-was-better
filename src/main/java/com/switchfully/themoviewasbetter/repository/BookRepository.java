@@ -36,6 +36,13 @@ public class BookRepository {
             bookStream = bookStream
                     .filter(book -> book.getIsbn().matches(".*" + params.get("isbn") + ".*"));
         }
+
+        if (params.containsKey("title")) {
+            bookStream = bookStream
+                    .filter(book -> book.getTitle().matches(".*" + params.get("title") + ".*"));
+        }
+
+
         return bookStream.toList();
     }
 
