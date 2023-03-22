@@ -19,12 +19,10 @@ import static org.assertj.core.api.Assertions.*;
 
 class BookControllerTest {
     private BookController controller;
-    private BookService service;
 
     @BeforeEach
     void setUp() {
-        service = new BookService(new BookRepository(), new BookMapper());
-        controller = new BookController(service);
+        controller = new BookController(new BookService(new BookRepository(), new BookMapper()));
     }
 
     @Test

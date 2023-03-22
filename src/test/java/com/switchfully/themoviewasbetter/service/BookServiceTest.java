@@ -2,6 +2,7 @@ package com.switchfully.themoviewasbetter.service;
 
 import com.switchfully.themoviewasbetter.domain.Book;
 import com.switchfully.themoviewasbetter.dto.BookDTO;
+import com.switchfully.themoviewasbetter.exceptions.BookNotFoundException;
 import com.switchfully.themoviewasbetter.mapper.BookMapper;
 import com.switchfully.themoviewasbetter.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,9 +24,7 @@ class BookServiceTest {
 
     @BeforeEach
     void setUp() {
-        repository = new BookRepository();
-        mapper = new BookMapper();
-        service = new BookService(repository, mapper);
+        service = new BookService(new BookRepository(), new BookMapper());
     }
 
     @Test
@@ -52,6 +51,16 @@ class BookServiceTest {
         BookDTO answer = service.findByIsbn(isbn);
 
         assertThat(answer).isEqualTo(bookDTO);
+    }
+
+    @Test
+    @DisplayName("Find by ISBN")
+    void findByIsbn_notFound() {
+        BookNotFoundException exception = new BookNotFoundException();
+
+        assertThatThrownBy(() -> service.findByIsbn(""))
+                .hasMessage(exception.getMessage())
+                .isInstanceOf(exception.getClass());
     }
 
     public static Stream<Arguments> findByIsbn() {
