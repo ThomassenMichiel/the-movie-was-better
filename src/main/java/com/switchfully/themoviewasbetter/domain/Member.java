@@ -34,7 +34,7 @@ public class Member {
         this.role = Role.MEMBER;
     }
 
-    // Getters3
+    // Getters
     public String getId() {
         return id;
     }
@@ -80,7 +80,6 @@ public class Member {
     }
 
     // Setters
-
 
     public void setId(String id) {
         this.id = id;
@@ -134,8 +133,8 @@ public class Member {
         return Objects.equals(INSS, user.INSS) && Objects.equals(email, user.email);
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(INSS, email);
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(INSS, email);
+    }
 }

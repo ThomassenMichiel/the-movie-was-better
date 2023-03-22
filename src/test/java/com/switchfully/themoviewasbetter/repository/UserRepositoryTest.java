@@ -1,4 +1,4 @@
-package switchfully.themoviewasbetter.repository;
+package com.switchfully.themoviewasbetter.repository;
 
 import com.switchfully.themoviewasbetter.repository.MemberRepository;
 import org.assertj.core.api.Assertions;

@@ -24,31 +24,31 @@ public class SecurityService {
     }
 
     public void validateAuthorization(String authorization, Feature feature) {
-        UsernamePassword usernamePassword = getUsernamePassword(authorization);
-        Member user = memberRepository.getMember(usernamePassword.getUserId());
+        Credentials emailPassword = getUsernamePassword(authorization);
+        Member user = memberRepository.getMember(emailPassword.getEmail());
 
         if (user == null) {
-            logger.error(format("Unknown user %s", usernamePassword.getUserId()));
+            logger.error(format("Unknown user %s", emailPassword.getEmail()));
             throw new UnknownUserException();
         }
-        if (!user.doesPasswordMatch(usernamePassword.getPassword())) {
-            logger.error(format("Password does not match for user %s", usernamePassword.getUserId()));
+        if (!user.doesPasswordMatch(emailPassword.getPassword())) {
+            logger.error(format("Password does not match for user %s", emailPassword.getEmail()));
             throw new WrongPasswordException();
         }
         if (!user.canHaveAccessTo(feature)) {
-            logger.error(format("User %s does not have access to %s", usernamePassword.getUserId(), feature));
+            logger.error(format("User %s does not have access to %s", emailPassword.getEmail(), feature));
             throw new UnauthorizatedException();
         }
 
     }
 
-    private UsernamePassword getUsernamePassword(String authorization) {
+    private Credentials getUsernamePassword(String authorization) {
         String decodedUsernameAndPassword = new String(Base64.getDecoder()
                 .decode(authorization.substring("Basic ".length())));
         String username = decodedUsernameAndPassword
                 .substring(0, decodedUsernameAndPassword.indexOf(":"));
         String password = decodedUsernameAndPassword
                 .substring(decodedUsernameAndPassword.indexOf(":") + 1);
-        return new UsernamePassword(username, password);
+        return new Credentials(username, password);
     }
 }
