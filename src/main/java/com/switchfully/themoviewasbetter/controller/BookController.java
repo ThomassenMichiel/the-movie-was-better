@@ -5,6 +5,7 @@ import com.switchfully.themoviewasbetter.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -19,8 +20,8 @@ public class BookController {
 
     @GetMapping
     @ResponseStatus(OK)
-    public List<BookDTO> getAllBooks() {
-        return bookService.getAllBooks();
+    public List<BookDTO> getAllBooks(@RequestParam Map<String, String> params) {
+        return bookService.getAllBooks(params);
     }
 
     //TODO: Show if book is lent out and who lent the book in details - Story 15 expansion
@@ -29,4 +30,6 @@ public class BookController {
     public BookDTO getBookDetails(@PathVariable String isbn){
         return bookService.findByIsbn(isbn);
     }
+
+
 }
