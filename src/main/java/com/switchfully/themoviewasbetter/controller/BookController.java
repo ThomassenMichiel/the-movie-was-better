@@ -2,10 +2,7 @@ package com.switchfully.themoviewasbetter.controller;
 
 import com.switchfully.themoviewasbetter.dto.BookDTO;
 import com.switchfully.themoviewasbetter.service.BookService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,12 @@ public class BookController {
     @ResponseStatus(OK)
     public List<BookDTO> getAllBooks() {
         return bookService.getAllBooks();
+    }
+
+    //TODO: Show if book is lent out and who lent the book in details - Story 15 expansion
+    @GetMapping("/{isbn}")
+    @ResponseStatus(OK)
+    public BookDTO getBookDetails(@PathVariable String isbn){
+        return bookService.findByIsbn(isbn);
     }
 }

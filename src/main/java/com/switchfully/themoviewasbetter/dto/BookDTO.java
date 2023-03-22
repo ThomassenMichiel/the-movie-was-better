@@ -8,11 +8,12 @@ public class BookDTO {
     private String authorFirstName;
     private String authorLastName;
 
-    public BookDTO(String isbn, String title, String authorFirstName, String authorLastName) {
+    public BookDTO(String isbn, String title, String authorFirstName, String authorLastName, String smallSummary) {
         this.isbn = isbn;
         this.title = title;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
+        this.smallSummary = smallSummary;
     }
 
     public String getIsbn() {
