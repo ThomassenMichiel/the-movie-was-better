@@ -2,7 +2,9 @@ package com.switchfully.themoviewasbetter.mapper;
 
 import com.switchfully.themoviewasbetter.domain.Member;
 import com.switchfully.themoviewasbetter.dto.MemberDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MemberMapper {
 
     public MemberDTO mapToDTO(Member member){

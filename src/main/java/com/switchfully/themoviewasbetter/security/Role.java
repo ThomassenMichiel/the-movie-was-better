@@ -6,7 +6,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.switchfully.themoviewasbetter.security.Feature.*;
 
 public enum Role {
-    ADMIN(newArrayList(REGISTER_ADMIN)),
+    ADMIN(newArrayList(REGISTER_ADMIN, GET_ALL_USERS)),
     LIBRARIAN(newArrayList()),
     MEMBER(newArrayList());
 
