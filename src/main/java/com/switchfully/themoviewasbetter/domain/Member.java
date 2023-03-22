@@ -1,5 +1,6 @@
-package switchfully.themoviewasbetter.domain;
+package com.switchfully.themoviewasbetter.domain;
 
+import com.switchfully.themoviewasbetter.security.Feature;
 import com.switchfully.themoviewasbetter.security.Role;
 
 import java.util.Objects;
@@ -124,12 +125,20 @@ public class Member {
     public void setRole(Role role) {
         this.role = role;
     }
+    // Methods
+    public boolean doesPasswordMatch(String password) {
+        return this.password.equals(password);
+    }
+
+    public boolean canHaveAccessTo(Feature feature) {
+        return role.containsFeature(feature);
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        switchfully.themoviewasbetter.domain.Member user = (switchfully.themoviewasbetter.domain.Member) o;
+        Member user = (Member) o;
         return Objects.equals(INSS, user.INSS) && Objects.equals(email, user.email);
     }
 
@@ -137,4 +146,6 @@ public class Member {
     public int hashCode() {
         return Objects.hash(INSS, email);
     }
+
+
 }

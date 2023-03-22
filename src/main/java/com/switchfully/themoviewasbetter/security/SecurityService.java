@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import switchfully.themoviewasbetter.domain.Member;
+import com.switchfully.themoviewasbetter.domain.Member;
 import java.util.Base64;
 
 import static java.lang.String.format;

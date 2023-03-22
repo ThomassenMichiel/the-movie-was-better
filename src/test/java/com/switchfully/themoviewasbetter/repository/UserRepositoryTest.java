@@ -1,5 +1,6 @@
 package com.switchfully.themoviewasbetter.repository;
 
+import com.switchfully.themoviewasbetter.domain.Member;
 import com.switchfully.themoviewasbetter.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,15 +12,15 @@ import java.util.List;
 class UserRepositoryTest {
 
     private MemberRepository repository;
-    private List<switchfully.themoviewasbetter.domain.Member> users = new ArrayList<>();
+    private List<Member> users = new ArrayList<>();
 
     @BeforeEach
     void beforeEach() {
-        var user1 = new switchfully.themoviewasbetter.domain.Member("1", "123", "sven@gmail.com"
+        var user1 = new Member("1", "123", "sven@gmail.com"
                 , "Van Gastel", "Sven", "molenstraat",
                 "28", "2920", "Kalmthout", "passwoordTest");
 
-        var user2 = new switchfully.themoviewasbetter.domain.Member("2", "125", "sven@gmail.com"
+        var user2 = new Member("2", "125", "sven@gmail.com"
                 , "Van Gast", "erik", "molenbaan",
                 "3", "2000", "Antwerrpen","passwoordTest");
 
