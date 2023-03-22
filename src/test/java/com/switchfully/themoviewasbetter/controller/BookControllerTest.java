@@ -32,15 +32,17 @@ class BookControllerTest {
         Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
         Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
         Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
+        Book fellowShipOfTheRing = new Book("9780345339706", "Lord of the Rings: Fellowship of the Ring", "J.R.R.", "Tolkien", "they're taking hobbits to isengard");
+        Book theComingStorm = new Book("9781423100188", "The Coming Storm (Pirates of the Caribbean: Jack Sparrow, No. 1)", "Rob", "Kidd", "I've got a jar of dirt");
 
         List<BookDTO> answer = controller.getAllBooks(new HashMap<>());
 
-        assertThat(answer).hasSize(3);
-        assertThat(answer).extracting(BookDTO::getIsbn).contains(harryPotter.getIsbn(), harryPotter2.getIsbn(), harryPotter3.getIsbn());
-        assertThat(answer).extracting(BookDTO::getTitle).contains(harryPotter.getTitle(), harryPotter2.getTitle(), harryPotter3.getTitle());
-        assertThat(answer).extracting(BookDTO::getAuthorFirstName).contains(harryPotter.getAuthorFirstName(), harryPotter2.getAuthorFirstName(), harryPotter3.getAuthorFirstName());
-        assertThat(answer).extracting(BookDTO::getAuthorLastName).contains(harryPotter.getAuthorLastName(), harryPotter2.getAuthorLastName(), harryPotter3.getAuthorLastName());
-        assertThat(answer).extracting(BookDTO::getSmallSummary).contains(harryPotter.getSmallSummary(), harryPotter2.getSmallSummary(), harryPotter3.getSmallSummary());
+        assertThat(answer).hasSize(5);
+        assertThat(answer).extracting(BookDTO::getIsbn).contains(harryPotter.getIsbn(), harryPotter2.getIsbn(), harryPotter3.getIsbn(), fellowShipOfTheRing.getIsbn(), theComingStorm.getIsbn());
+        assertThat(answer).extracting(BookDTO::getTitle).contains(harryPotter.getTitle(), harryPotter2.getTitle(), harryPotter3.getTitle(), fellowShipOfTheRing.getTitle(), theComingStorm.getTitle());
+        assertThat(answer).extracting(BookDTO::getAuthorFirstName).contains(harryPotter.getAuthorFirstName(), harryPotter2.getAuthorFirstName(), harryPotter3.getAuthorFirstName(), fellowShipOfTheRing.getAuthorFirstName(), theComingStorm.getAuthorFirstName());
+        assertThat(answer).extracting(BookDTO::getAuthorLastName).contains(harryPotter.getAuthorLastName(), harryPotter2.getAuthorLastName(), harryPotter3.getAuthorLastName(), fellowShipOfTheRing.getAuthorLastName(), theComingStorm.getAuthorLastName());
+        assertThat(answer).extracting(BookDTO::getSmallSummary).contains(harryPotter.getSmallSummary(), harryPotter2.getSmallSummary(), harryPotter3.getSmallSummary(), fellowShipOfTheRing.getSmallSummary(), theComingStorm.getSmallSummary());
     }
 
     @ParameterizedTest

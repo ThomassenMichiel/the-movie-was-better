@@ -25,7 +25,10 @@ public class BookRepository {
         repository.put(harryPotter2.getIsbn(), harryPotter2);
         Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban", "J.K.", "Rowling", "Harry's been naughty");
         repository.put(harryPotter3.getIsbn(), harryPotter3);
-
+        Book fellowShipOfTheRing = new Book("9780345339706", "Lord of the Rings: Fellowship of the Ring", "J.R.R.", "Tolkien", "they're taking hobbits to isengard");
+        repository.put(fellowShipOfTheRing.getIsbn(), fellowShipOfTheRing);
+        Book theComingStorm = new Book("9781423100188", "The Coming Storm (Pirates of the Caribbean: Jack Sparrow, No. 1)", "Rob", "Kidd", "I've got a jar of dirt");
+        repository.put(theComingStorm.getIsbn(), theComingStorm);
     }
 
     public List<Book> getAllBooks(Map<String, String> params) {
