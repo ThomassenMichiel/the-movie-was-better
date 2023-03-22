@@ -1,5 +1,6 @@
 package com.switchfully.themoviewasbetter.domain;
 
+import com.switchfully.themoviewasbetter.dto.MemberDTO;
 import com.switchfully.themoviewasbetter.security.Feature;
 import com.switchfully.themoviewasbetter.security.Role;
 
@@ -20,6 +21,7 @@ public class Member {
     private Role role;
 
 
+    public Member(){}
     public Member(String id, String INSS, String email, String lastname, String firstname, String streetName,
                   String nr, String postcode, String city, String password) {
         this.id = id;
@@ -82,49 +84,61 @@ public class Member {
 
     // Setters
 
-    public void setId(String id) {
+    public Member setId(String id) {
         this.id = id;
+        return this;
     }
 
-    public void setINSS(String INSS) {
+    public Member setINSS(String INSS) {
         this.INSS = INSS;
+        return this;
     }
 
-    public void setEmail(String email) {
+    public Member setEmail(String email) {
         this.email = email;
+        return this;
     }
 
-    public void setLastname(String lastname) {
+    public Member setLastname(String lastname) {
         this.lastname = lastname;
+        return this;
     }
 
-    public void setFirstname(String firstname) {
+    public Member setFirstname(String firstname) {
         this.firstname = firstname;
+        return this;
     }
 
-    public void setStreetName(String streetName) {
+    public Member setStreetName(String streetName) {
         this.streetName = streetName;
+        return this;
     }
 
-    public void setNr(String nr) {
+    public Member setNr(String nr) {
         this.nr = nr;
+        return this;
     }
 
-    public void setPostcode(String postcode) {
+    public Member setPostcode(String postcode) {
         this.postcode = postcode;
+        return this;
     }
 
-    public void setCity(String city) {
+    public Member setCity(String city) {
         this.city = city;
+        return this;
     }
 
-    public void setPassword(String password) {
+    public Member setPassword(String password) {
         this.password = password;
+        return this;
     }
 
-    public void setRole(Role role) {
+    public Member setRole(Role role) {
         this.role = role;
+        return this;
     }
+
     // Methods
     public boolean doesPasswordMatch(String password) {
         return this.password.equals(password);

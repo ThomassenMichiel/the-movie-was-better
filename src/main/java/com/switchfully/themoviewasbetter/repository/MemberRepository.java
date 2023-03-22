@@ -19,10 +19,12 @@ public class MemberRepository {
     }
 
     private static Member putAdminMain() {
-        Member adminMain = new Member("0", "", "pieter.pauwels13@gmail.com", "", "", "", "", "", "", "XXX");
+        Member adminMain = new Member("0", "123", "pieter.pauwels13@gmail.com", "", "",
+                "", "", "", "", "XXX");
         adminMain.setRole(Role.ADMIN);
         return adminMain;
     }
+
     public Collection<Member> getAllUsers() {
         return membersById.values();
     }
