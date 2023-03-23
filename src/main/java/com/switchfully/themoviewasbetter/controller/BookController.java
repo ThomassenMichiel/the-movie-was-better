@@ -21,7 +21,7 @@ public class BookController {
     @GetMapping
     @ResponseStatus(OK)
     public List<BookDTO> getAllBooks(@RequestParam Map<String, String> params) {
-        return bookService.getAllBooks(params);
+        return bookService.findAllBooks(params);
     }
 
     //TODO: Show if book is lent out and who lent the book in details - Story 15 expansion

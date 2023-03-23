@@ -20,7 +20,7 @@ public class BookService {
         this.mapper = mapper;
     }
 
-    public List<BookDTO> getAllBooks(Map<String, String> params) {
+    public List<BookDTO> findAllBooks(Map<String, String> params) {
         return bookRepository.findAllBooks(params).stream().map(mapper::toDto).toList();
     }
 
