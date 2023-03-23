@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BookRentalService {
@@ -21,15 +20,16 @@ public class BookRentalService {
         this.mapper = mapper;
     }
 
-    public List<BookRentalDTO> getAllRentals(){
-        return bookRentalRepository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
+    public List<BookRentalDTO> getAllRentals() {
+        return bookRentalRepository.findAll().stream().map(mapper::toDto).toList();
     }
+
     public BookRentalDTO saveRental(BookRentalDTO newRental) {
         BookRental rentalToSave = mapper.toBookRental(newRental);
         return mapper.toDto(bookRentalRepository.create(rentalToSave));
     }
 
-    public void returnBookRental(BookRentalDTO bookRentalToReturn){
+    public void returnBookRental(BookRentalDTO bookRentalToReturn) {
         bookRentalRepository.delete(mapper.toBookRental(bookRentalToReturn));
     }
 
@@ -37,13 +37,13 @@ public class BookRentalService {
         return mapper.listToDto(bookRentalRepository.findAll()
                 .stream()
                 .filter(x -> member.equals(x.getMember()))
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     public List<BookRentalDTO> getAllBookRentalsByDueDate() {
         return mapper.listToDto(bookRentalRepository.findAll()
                 .stream()
                 .filter(x -> LocalDate.now().isAfter(x.getReturnDate()))
-                .collect(Collectors.toList()));
+                .toList());
     }
 }
