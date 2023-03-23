@@ -13,7 +13,7 @@ import java.util.Base64;
 
 @Service
 public class SecurityService {
-    private final Logger logger = LoggerFactory.getLogger(SecurityService.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MemberRepository memberRepository;
 
