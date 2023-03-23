@@ -23,7 +23,7 @@ class MemberTest {
                 new Member("1", "123", "sven@gmail.com"
                         , "   ", "Sven", "molenstraat",
                         "28", "2920", "Kalmthout", "passwoordTest"));
-        assertEquals(fieldIsEmptyException.getMessage(), "Field lastname can't be empty.");
+        assertEquals(fieldIsEmptyException.getMessage(), "Field lastName can't be empty.");
     }
 
     @Test
