@@ -1,18 +1,14 @@
 package com.switchfully.themoviewasbetter.repository;
 
 import com.switchfully.themoviewasbetter.domain.Member;
-import com.switchfully.themoviewasbetter.exceptions.EmailNotValidException;
-import com.switchfully.themoviewasbetter.exceptions.FieldIsEmptyException;
 import com.switchfully.themoviewasbetter.exceptions.MemberNotUniqueException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -38,7 +34,6 @@ class MemberRepositoryTest {
         members.put(member1.getEmail(), member1);
         members.put(member2.getEmail(), member2);
 
-        repository.registerMember(member1);
         repository.registerMember(member2);
     }
 
@@ -83,7 +78,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    void cantRegisterAMemberWithTHeSameEmail() {
+    void cantRegisterAMemberWithTheSameEmail() {
         var member2 = new Member("2", "125", "sven@gmail.com"
                 , "Van Gast", "erik", "molenbaan",
                 "3", "2000", "Antwerrpen", "passwoordTest");
@@ -94,7 +89,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    void cantRegisterAMemberWithTHeSameINSS() {
+    void cantRegisterAMemberWithTheSameINSS() {
         var member2 = new Member("2", "123", "sven2@gmail.com"
                 , "Van Gast", "erik", "molenbaan",
                 "3", "2000", "Antwerrpen", "passwoordTest");
