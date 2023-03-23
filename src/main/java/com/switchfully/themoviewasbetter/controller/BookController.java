@@ -20,7 +20,7 @@ public class BookController {
 
     @GetMapping
     @ResponseStatus(OK)
-    public List<BookDTO> getAllBooks(@RequestParam Map<String, String> params) {
+    public List<BookDTO> findAllBooks(@RequestParam Map<String, String> params) {
         return bookService.findAllBooks(params);
     }
 
@@ -29,7 +29,6 @@ public class BookController {
     @ResponseStatus(OK)
     public BookDTO getBookDetails(@PathVariable String isbn){
         return bookService.findByIsbn(isbn);
-
     }
 
 
