@@ -2,7 +2,6 @@ package com.switchfully.themoviewasbetter.repository;
 
 import com.switchfully.themoviewasbetter.domain.Member;
 import com.switchfully.themoviewasbetter.exceptions.MemberNotUniqueException;
-import com.switchfully.themoviewasbetter.security.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -10,25 +9,28 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
+import static com.switchfully.themoviewasbetter.security.Role.ADMIN;
+import static com.switchfully.themoviewasbetter.security.Role.LIBRARIAN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Member repository test")
 class MemberRepositoryTest {
-    private MemberRepository repository = new MemberRepository();
-    private HashMap<String, Member> members = new HashMap<>();
+    private final HashMap<String, Member> members = new HashMap<>();
+    private MemberRepository repository;
 
     @BeforeEach
     void beforeEach() {
-        Member adminMain = new Member("0", "123", "pieter.pauwels13@gmail.com", "pauwels",
+        repository = new MemberRepository();
+        Member adminMain = new Member("123", "pieter.pauwels13@gmail.com", "pauwels",
                 "", "", "", "", "Gent", "XXX");
 
-        var member1 = new Member("1", "124", "sven@gmail.com"
+        var member1 = new Member("124", "sven@gmail.com"
                 , "Van Gastel", "Sven", "molenstraat",
                 "28", "2920", "Kalmthout", "passwoordTest");
 
-        var member2 = new Member("2", "125", "sven6@gmail.com"
+        var member2 = new Member("125", "sven6@gmail.com"
                 , "Van Gast", "erik", "molenbaan",
                 "3", "2000", "Antwerrpen", "passwoordTest");
 
@@ -37,6 +39,17 @@ class MemberRepositoryTest {
         members.put(member2.getEmail(), member2);
 
         repository.registerMember(member2);
+    }
+
+    @Test
+    void saveLibrarian() {
+        Member librarian = new Member("12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
+                "", "", "", "", "Gent", "XXX", LIBRARIAN);
+        repository.registerMember(librarian);
+        assertThat(repository.getAllUsers()).contains(librarian);
+
+        Member member = repository.getMember(librarian.getEmail());
+        assertThat(member).extracting("role").isEqualTo(LIBRARIAN);
     }
 
     @Nested
@@ -55,7 +68,7 @@ class MemberRepositoryTest {
         @Test
         @DisplayName("Create a new member")
         void registerMember() {
-            Member adminMain = new Member("0", "123", "pieter.pauwels13@gmail.com", "Pauwels",
+            Member adminMain = new Member("123", "pieter.pauwels13@gmail.com", "Pauwels",
                     "", "", "", "", "Gent", "XXX");
             assertThat(repository.getAllUsers()).contains(adminMain);
         }
@@ -63,10 +76,10 @@ class MemberRepositoryTest {
         @Test
         @DisplayName("Create multiple members")
         void registerNewMember() {
-            Member member1 = new Member("4", "126", "sven2@gmail.com"
+            Member member1 = new Member("126", "sven2@gmail.com"
                     , "Van Gastel", "Sven", "molenstraat",
                     "28", "2920", "Kalmthout", "passwoordTest");
-            Member member2 = new Member("5", "127", "sven28447815@gmail.com"
+            Member member2 = new Member("127", "sven28447815@gmail.com"
                     , "Van Gastel", "Sven", "molenstraat",
                     "28", "2920", "Kalmthout", "passwoordTest");
 
@@ -81,13 +94,12 @@ class MemberRepositoryTest {
         @Test
         @DisplayName("Create an admin")
         void saveAdmin() {
-            Member adminMain = new Member("9999", "12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
-                    "", "", "", "", "Gent", "XXX");
-            repository.registerAdministrator(adminMain);
+            Member adminMain = new Member("12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
+                    "", "", "", "", "Gent", "XXX", ADMIN);
+            Member member = repository.registerMember(adminMain);
             assertThat(repository.getAllUsers()).contains(adminMain);
 
-            Member member = repository.getMember(adminMain.getEmail());
-            assertThat(member).extracting("role").isEqualTo(Role.ADMIN);
+            assertThat(member).extracting("role").isEqualTo(ADMIN);
         }
 
         @Nested
@@ -96,7 +108,7 @@ class MemberRepositoryTest {
             @Test
             @DisplayName("Cannot create a member with an existing email")
             void cantRegisterAMemberWithTheSameEmail() {
-                Member member2 = new Member("2", "125", "sven@gmail.com"
+                Member member2 = new Member("125", "sven@gmail.com"
                         , "Van Gast", "erik", "molenbaan",
                         "3", "2000", "Antwerrpen", "passwoordTest");
                 MemberNotUniqueException memberNotUniqueException = assertThrows(MemberNotUniqueException.class, () ->
@@ -108,7 +120,7 @@ class MemberRepositoryTest {
             @Test
             @DisplayName("Cannot create a member with an existing INSS")
             void cantRegisterAMemberWithTheSameINSS() {
-                Member member2 = new Member("2", "123", "sven2@gmail.com"
+                Member member2 = new Member("123", "sven2@gmail.com"
                         , "Van Gast", "erik", "molenbaan",
                         "3", "2000", "Antwerrpen", "passwoordTest");
                 MemberNotUniqueException memberNotUniqueException = assertThrows(MemberNotUniqueException.class, () ->
@@ -119,17 +131,6 @@ class MemberRepositoryTest {
         }
 
 
-    }
-
-    @Test
-    void saveLibrarian() {
-        Member librarian = new Member("9999", "12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
-                "", "", "", "", "Gent", "XXX");
-        repository.registerLibrarian(librarian);
-        assertThat(repository.getAllUsers()).contains(librarian);
-
-        Member member = repository.getMember(librarian.getEmail());
-        assertThat(member).extracting("role").isEqualTo(Role.LIBRARIAN);
     }
 
 

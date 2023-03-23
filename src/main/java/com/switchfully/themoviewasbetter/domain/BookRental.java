@@ -5,12 +5,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class BookRental {
-    //VARIABLES
-    private String id;
-    private Member member;
-    private Book book;
-    private LocalDate returnDate;
-    //CONSTRUCTOR
+    private final String id;
+    private final Member member;
+    private final Book book;
+    private final LocalDate returnDate;
 
 
     public BookRental(String id, Member member, Book book, LocalDate returnDate) {
@@ -20,7 +18,6 @@ public class BookRental {
         this.returnDate = returnDate;
     }
 
-    //METHODS
     public Book getBook() {
         return book;
     }

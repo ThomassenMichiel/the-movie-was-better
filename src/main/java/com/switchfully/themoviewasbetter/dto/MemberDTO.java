@@ -2,41 +2,49 @@ package com.switchfully.themoviewasbetter.dto;
 
 import com.switchfully.themoviewasbetter.security.Role;
 
+import java.util.Objects;
+
 public class MemberDTO {
 
-    private String id;
-    private String email;
-    private String lastname;
-    private String firstname;
-    private String streetName;
-    private String nr;
-    private String postcode;
-    private String city; // not null
-    private String password;
-    private Role role;
+    private final String email;
+    private final String lastName;
+    private final String firstName;
+    private final String streetName;
+    private final String number;
+    private final String postcode;
+    private final String city; // not null
+    private final Role role;
 
-    public String getId(){
-        return id;
+
+    public MemberDTO(String email, String lastName, String firstName, String streetName, String number, String postcode, String city, Role role) {
+        this.email = email;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.streetName = streetName;
+        this.number = number;
+        this.postcode = postcode;
+        this.city = city;
+        this.role = role;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getStreetName() {
         return streetName;
     }
 
-    public String getNr() {
-        return nr;
+    public String getNumber() {
+        return number;
     }
 
     public String getPostcode() {
@@ -47,60 +55,19 @@ public class MemberDTO {
         return city;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public Role getRole() {
         return role;
     }
-    public MemberDTO setId(String id) {
-        this.id = id;
-        return this;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MemberDTO memberDTO)) return false;
+        return Objects.equals(email, memberDTO.email);
     }
 
-    public MemberDTO setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public MemberDTO setLastname(String lastname) {
-        this.lastname = lastname;
-        return this;
-    }
-
-    public MemberDTO setFirstname(String firstname) {
-        this.firstname = firstname;
-        return this;
-    }
-
-    public MemberDTO setStreetName(String streetName) {
-        this.streetName = streetName;
-        return this;
-    }
-
-    public MemberDTO setNr(String nr) {
-        this.nr = nr;
-        return this;
-    }
-
-    public MemberDTO setPostcode(String postcode) {
-        this.postcode = postcode;
-        return this;
-    }
-
-    public MemberDTO setCity(String city) {
-        this.city = city;
-        return this;
-    }
-
-    public MemberDTO setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public MemberDTO setRole(Role role) {
-        this.role = role;
-        return this;
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 }

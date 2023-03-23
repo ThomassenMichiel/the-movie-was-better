@@ -15,17 +15,17 @@ public class MemberRepository {
 
     public MemberRepository() {
         this.repository.put("pieter.pauwels13@gmail.com", putAdminMain());
-        var member1 = new Member("1", "124", "sven@gmail.com"
+        Member member = new Member("124", "sven@gmail.com"
                 , "Van Gastel", "Sven", "molenstraat",
                 "28", "2920", "Kalmthout", "passwoordTest");
-        repository.put(member1.getEmail(), member1);
+        repository.put(member.getEmail(), member);
     }
 
     private static Member putAdminMain() {
-        Member adminMain = new Member("0", "123", "pieter.pauwels13@gmail.com", "Pauwels", "",
+        Member admin = new Member("123", "pieter.pauwels13@gmail.com", "Pauwels", "",
                 "", "", "", "Gent", "XXX"); // cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY
-        adminMain.setRole(Role.ADMIN);
-        return adminMain;
+        admin.setRole(Role.ADMIN);
+        return admin;
     }
 
     public Collection<Member> getAllUsers() {
@@ -38,22 +38,6 @@ public class MemberRepository {
         repository.put(member.getEmail(), member);
         return member;
 
-    }
-
-    public Member registerAdministrator(Member member) {
-        checkIfUserInssAndEmailAreUnique(member);
-
-        member.setRole(Role.ADMIN);
-        repository.put(member.getEmail(), member);
-        return member;
-    }
-
-    public Member registerLibrarian(Member member) {
-        checkIfUserInssAndEmailAreUnique(member);
-
-        member.setRole(Role.LIBRARIAN);
-        repository.put(member.getEmail(), member);
-        return member;
     }
 
 

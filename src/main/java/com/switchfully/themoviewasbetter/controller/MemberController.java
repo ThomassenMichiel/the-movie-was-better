@@ -6,7 +6,6 @@ import com.switchfully.themoviewasbetter.dto.MemberDTO;
 import com.switchfully.themoviewasbetter.exceptions.UnauthorizedException;
 import com.switchfully.themoviewasbetter.exceptions.UnknownUserException;
 import com.switchfully.themoviewasbetter.exceptions.WrongPasswordException;
-import com.switchfully.themoviewasbetter.security.SecurityService;
 import com.switchfully.themoviewasbetter.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,24 +14,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.switchfully.themoviewasbetter.security.Feature.GET_ALL_USERS;
-import static com.switchfully.themoviewasbetter.security.Feature.REGISTER_ADMIN;
-
 @RestController
 @RequestMapping("members")
 public class MemberController {
     private final MemberService memberService;
-    private final SecurityService securityService;
 
-    public MemberController(MemberService service, SecurityService securityService) {
+
+    public MemberController(MemberService service) {
         this.memberService = service;
-        this.securityService = securityService;
     }
 
     @GetMapping()
     public List<MemberDTO> findAll(@RequestHeader String authorization) {
-        securityService.validateAuthorization(authorization, GET_ALL_USERS);
-        return memberService.findAll();
+        return memberService.findAll(authorization);
     }
 
     @GetMapping(path = "/{id}")
@@ -42,22 +36,8 @@ public class MemberController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO save(@RequestBody CreateMemberDTO newMember) {
-        return memberService.save(newMember);
-    }
-
-    @PostMapping("/admins")
-    @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO saveAdmin(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
-        securityService.validateAuthorization(authorization, REGISTER_ADMIN);
-        return memberService.saveAdmin(newMember);
-    }
-
-    @PostMapping("/librarians")
-    @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO saveLibrarian(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
-        securityService.validateAuthorization(authorization, REGISTER_ADMIN);
-        return memberService.saveLibrarian(newMember);
+    public MemberDTO save(@RequestHeader String authorization, @RequestBody CreateMemberDTO newMember) {
+        return memberService.save(authorization, newMember);
     }
 
     @ExceptionHandler({MissingRequestHeaderException.class})

@@ -8,39 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberMapper {
 
-    public MemberDTO mapToDTO(Member member){
-        return new MemberDTO()
-                .setId(member.getId())
-                .setEmail(member.getEmail())
-                .setLastname(member.getFirstname())
-                .setNr(member.getNr())
-                .setPostcode(member.getPostcode())
-                .setCity(member.getCity())
-                .setPassword(member.getPassword())
-                .setRole(member.getRole());
+    public MemberDTO toDto(Member member){
+        return new MemberDTO(member.getEmail(), member.getLastname(), member.getFirstname(), member.getStreetName(), member.getNr(), member.getPostcode(), member.getCity(), member.getRole());
     }
 
-    public Member mapToMember(MemberDTO memberDTO){
-        return new Member()
-                .setId(memberDTO.getId())
-                .setEmail(memberDTO.getEmail())
-                .setLastname(memberDTO.getFirstname())
-                .setNr(memberDTO.getNr())
-                .setPostcode(memberDTO.getPostcode())
-                .setCity(memberDTO.getCity())
-                .setPassword(memberDTO.getPassword())
-                .setRole(memberDTO.getRole());
-    }
-
-    public Member mapToMember(CreateMemberDTO memberDTO){
-        return new Member()
-                .setId(memberDTO.getId())
-                .setEmail(memberDTO.getEmail())
-                .setLastname(memberDTO.getFirstname())
-                .setNr(memberDTO.getNr())
-                .setPostcode(memberDTO.getPostcode())
-                .setCity(memberDTO.getCity())
-                .setPassword(memberDTO.getPassword())
-                .setRole(memberDTO.getRole());
+    public Member toDomain(CreateMemberDTO memberDTO){
+        return new Member(memberDTO.getInss(),memberDTO.getEmail(), memberDTO.getLastname(), memberDTO.getFirstname(), memberDTO.getStreetName(), memberDTO.getNr(), memberDTO.getPostcode(), memberDTO.getCity(), memberDTO.getPassword(), memberDTO.getRole());
     }
 }
