@@ -6,6 +6,7 @@ import com.switchfully.themoviewasbetter.dto.MemberDTO;
 import com.switchfully.themoviewasbetter.exceptions.UnauthorizedException;
 import com.switchfully.themoviewasbetter.exceptions.UnknownUserException;
 import com.switchfully.themoviewasbetter.exceptions.WrongPasswordException;
+import com.switchfully.themoviewasbetter.security.Feature;
 import com.switchfully.themoviewasbetter.security.SecurityService;
 import com.switchfully.themoviewasbetter.service.MemberService;
 import org.slf4j.Logger;
@@ -54,6 +55,13 @@ public class MemberController {
     public MemberDTO saveAdmin(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
         securityService.validateAuthorization(authorization, REGISTER_ADMIN);
         return memberService.saveAdmin(newMember);
+    }
+
+    @PostMapping("/librarians")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MemberDTO saveLibrarian(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
+        securityService.validateAuthorization(authorization, REGISTER_ADMIN);
+        return memberService.saveLibrarian(newMember);
     }
 
     @ExceptionHandler({MissingRequestHeaderException.class})
