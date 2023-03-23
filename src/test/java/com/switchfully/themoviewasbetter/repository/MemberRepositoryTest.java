@@ -112,5 +112,16 @@ class MemberRepositoryTest {
         assertThat(member).extracting("role").isEqualTo(Role.ADMIN);
     }
 
+    @Test
+    void saveLibrarian() {
+        Member librarian = new Member("9999", "12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
+                "", "", "", "", "Gent", "XXX");
+        repository.registerLibrarian(librarian);
+        assertThat(repository.getAllUsers()).contains(librarian);
+
+        Member member = repository.getMember(librarian.getEmail());
+        assertThat(member).extracting("role").isEqualTo(Role.LIBRARIAN);
+    }
+
 
 }
