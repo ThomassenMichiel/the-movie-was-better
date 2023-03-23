@@ -45,6 +45,17 @@ public class BookDTO {
     }
 
     @Override
+    public String toString() {
+        return "BookDTO{" +
+                "isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", authorFirstName='" + authorFirstName + '\'' +
+                ", authorLastName='" + authorLastName + '\'' +
+                ", smallSummary='" + smallSummary + '\'' +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(isbn, title, authorFirstName, authorLastName);
     }
