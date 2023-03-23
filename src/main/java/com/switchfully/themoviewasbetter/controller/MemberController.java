@@ -1,6 +1,5 @@
 package com.switchfully.themoviewasbetter.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.switchfully.themoviewasbetter.dto.ApiError;
 import com.switchfully.themoviewasbetter.dto.CreateMemberDTO;
 import com.switchfully.themoviewasbetter.dto.MemberDTO;
@@ -50,19 +49,20 @@ public class MemberController {
         return memberService.save(newMember);
     }
 
-    @ExceptionHandler({ MissingRequestHeaderException.class })
-    public @ResponseBody ResponseEntity<ApiError> noAuthorizationProvided() {
-        return new ResponseEntity<>(new ApiError(HttpStatus.FORBIDDEN.value(), "Required header 'Authorization' is not present"), HttpStatus.FORBIDDEN);
-    }
-
-    @ExceptionHandler({ WrongPasswordException.class, UnknownUserException.class, UnauthorizedException.class })
-    public @ResponseBody ResponseEntity<ApiError> invalidAuthorizationEntry() {
-        return new ResponseEntity<>(new ApiError(HttpStatus.FORBIDDEN.value(), "Invalid authorization"), HttpStatus.FORBIDDEN);
-    }
-        @PostMapping("/admins")
+    @PostMapping("/admins")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDTO saveAdmin(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
         securityService.validateAuthorization(authorization, REGISTER_ADMIN);
         return memberService.saveAdmin(newMember);
+    }
+
+    @ExceptionHandler({MissingRequestHeaderException.class})
+    public @ResponseBody ResponseEntity<ApiError> noAuthorizationProvided() {
+        return new ResponseEntity<>(new ApiError(HttpStatus.FORBIDDEN.value(), "Required header 'Authorization' is not present"), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler({WrongPasswordException.class, UnknownUserException.class, UnauthorizedException.class})
+    public @ResponseBody ResponseEntity<ApiError> invalidAuthorizationEntry() {
+        return new ResponseEntity<>(new ApiError(HttpStatus.FORBIDDEN.value(), "Invalid authorization"), HttpStatus.FORBIDDEN);
     }
 }
