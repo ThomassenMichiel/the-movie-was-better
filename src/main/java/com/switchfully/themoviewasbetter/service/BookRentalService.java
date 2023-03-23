@@ -25,23 +25,23 @@ public class BookRentalService {
     }
 
     public BookRentalDTO saveRental(BookRentalDTO newRental) {
-        BookRental rentalToSave = mapper.toBookRental(newRental);
+        BookRental rentalToSave = mapper.toDomain(newRental);
         return mapper.toDto(bookRentalRepository.create(rentalToSave));
     }
 
     public void returnBookRental(BookRentalDTO bookRentalToReturn) {
-        bookRentalRepository.delete(mapper.toBookRental(bookRentalToReturn));
+        bookRentalRepository.delete(mapper.toDomain(bookRentalToReturn));
     }
 
     public List<BookRentalDTO> getAllBookRentalsByMember(Member member) {
-        return mapper.listToDto(bookRentalRepository.findAll()
+        return mapper.toDto(bookRentalRepository.findAll()
                 .stream()
                 .filter(x -> member.equals(x.getMember()))
                 .toList());
     }
 
     public List<BookRentalDTO> getAllBookRentalsByDueDate() {
-        return mapper.listToDto(bookRentalRepository.findAll()
+        return mapper.toDto(bookRentalRepository.findAll()
                 .stream()
                 .filter(x -> LocalDate.now().isAfter(x.getReturnDate()))
                 .toList());
