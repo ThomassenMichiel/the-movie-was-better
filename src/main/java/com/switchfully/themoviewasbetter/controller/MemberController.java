@@ -30,13 +30,13 @@ public class MemberController {
     }
 
     @GetMapping(path = "/{id}")
-    public MemberDTO getMember(@PathVariable("id") String id) {
+    public MemberDTO findById(@PathVariable("id") String id) {
         return memberService.findById(id);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO save(@RequestHeader String authorization, @RequestBody CreateMemberDTO newMember) {
+    public MemberDTO create(@RequestHeader String authorization, @RequestBody CreateMemberDTO newMember) {
         return memberService.save(authorization, newMember);
     }
 
