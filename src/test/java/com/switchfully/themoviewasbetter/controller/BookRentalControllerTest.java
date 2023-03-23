@@ -10,6 +10,7 @@ import com.switchfully.themoviewasbetter.mapper.BookRentalMapper;
 import com.switchfully.themoviewasbetter.repository.BookRentalRepository;
 import com.switchfully.themoviewasbetter.repository.BookRepository;
 import com.switchfully.themoviewasbetter.repository.MemberRepository;
+import com.switchfully.themoviewasbetter.security.Role;
 import com.switchfully.themoviewasbetter.security.SecurityService;
 import com.switchfully.themoviewasbetter.service.BookRentalService;
 import com.switchfully.themoviewasbetter.service.BookService;
@@ -26,22 +27,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BookRentalControllerTest {
     private BookRentalController controller;
+    LocalDate localDate = LocalDate.now();
+    Member member01 = new Member();
+
+
+    Member member02 = new Member();
 
     @BeforeEach
     void setUp() {
         controller = new BookRentalController(new BookRentalService(new BookRentalRepository(), new BookRentalMapper()), new SecurityService(new MemberRepository()));
+
+
+
+        Member librarian00 = new Member();
+        librarian00.setRole(Role.LIBRARIAN);
+        librarian00.setEmail("pp@mail.com");
+        librarian00.setPassword("XXX");
     }
-    LocalDate localDate = LocalDate.now();
-    Member member01 = new Member();
-    Member member02 = new Member();
+
     Book book00 = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
     @Test
     @DisplayName("Get all rentals from list OK?")
     void getAllRentals(){
-
-//        BookRental rental00 = new BookRental("1",member01, book00,localDate );
-//        BookRental rental01 = new BookRental("2",member01, book00,localDate );
-//        BookRental rental02 = new BookRental("3",member01, book00,localDate );
 
         BookRentalDTO bookRentalDTO00 = new BookRentalDTO("1",member01, book00,localDate );
         BookRentalDTO bookRentalDTO01 = new BookRentalDTO("2",member01, book00,localDate );
@@ -61,18 +68,22 @@ class BookRentalControllerTest {
 
     @Test
     void returnBookRental() {
-
         BookRentalDTO bookRentalDTO00 = new BookRentalDTO("1",member01, book00,localDate );
+        BookRentalDTO bookRentalDTO01 = new BookRentalDTO("2",member01, book00,localDate );
+        controller.lendBookRental(bookRentalDTO00);
+        controller.lendBookRental(bookRentalDTO01);
+
 
         controller.returnBookRental(bookRentalDTO00);
 
         List<BookRentalDTO> answer = controller.getAllBookRentals();
 
-        assertThat(answer).hasSize(2);
+        assertThat(answer).hasSize(1);
 
     }
     @Test
     void getAllBookRentalsByMember() {
+        controller.getAllBookRentalsByMember("WFhYOnBwQG1haWwuY29t" , member01);
 
 
     }
