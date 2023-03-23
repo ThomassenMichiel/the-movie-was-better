@@ -5,7 +5,6 @@ import com.switchfully.themoviewasbetter.security.Role;
 public class MemberDTO {
 
     private String id;
-    private String INSS;
     private String email;
     private String lastname;
     private String firstname;
@@ -18,9 +17,6 @@ public class MemberDTO {
 
     public String getId(){
         return id;
-    }
-    public String getINSS() {
-        return INSS;
     }
 
     public String getEmail() {
@@ -60,11 +56,6 @@ public class MemberDTO {
     }
     public MemberDTO setId(String id) {
         this.id = id;
-        return this;
-    }
-
-    public MemberDTO setINSS(String INSS) {
-        this.INSS = INSS;
         return this;
     }
 

@@ -36,7 +36,6 @@ class MemberRepositoryTest {
         members.put(member1.getEmail(), member1);
         members.put(member2.getEmail(), member2);
 
-        repository.registerMember(member1);
         repository.registerMember(member2);
     }
 
