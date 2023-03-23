@@ -19,6 +19,10 @@ public class MemberRepository {
                 , "Van Gastel", "Sven", "molenstraat",
                 "28", "2920", "Kalmthout", "passwoordTest");
         repository.put(member1.getEmail(), member1);
+        var member2 = new Member("2", "125", "sven6@gmail.com"
+                , "Van Gast", "erik", "molenbaan",
+                "3", "2000", "Antwerrpen", "passwoordTest");
+        repository.put(member2.getEmail(), member2);
     }
 
     private static Member putAdminMain() {
