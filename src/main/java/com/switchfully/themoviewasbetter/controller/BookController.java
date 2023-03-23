@@ -24,7 +24,6 @@ public class BookController {
         return bookService.findAllBooks(params);
     }
 
-    //TODO: Show if book is lent out and who lent the book in details - Story 15 expansion
     @GetMapping("/{isbn}")
     @ResponseStatus(OK)
     public BookDTO getBookDetails(@PathVariable String isbn){
