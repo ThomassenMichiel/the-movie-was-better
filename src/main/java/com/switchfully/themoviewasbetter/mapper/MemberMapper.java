@@ -1,6 +1,7 @@
 package com.switchfully.themoviewasbetter.mapper;
 
 import com.switchfully.themoviewasbetter.domain.Member;
+import com.switchfully.themoviewasbetter.dto.CreateMemberDTO;
 import com.switchfully.themoviewasbetter.dto.MemberDTO;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,6 @@ public class MemberMapper {
     public MemberDTO mapToDTO(Member member){
         return new MemberDTO()
                 .setId(member.getId())
-                .setINSS(member.getInss())
                 .setEmail(member.getEmail())
                 .setLastname(member.getFirstname())
                 .setNr(member.getNr())
@@ -23,7 +23,18 @@ public class MemberMapper {
     public Member mapToMember(MemberDTO memberDTO){
         return new Member()
                 .setId(memberDTO.getId())
-                .setInss(memberDTO.getINSS())
+                .setEmail(memberDTO.getEmail())
+                .setLastname(memberDTO.getFirstname())
+                .setNr(memberDTO.getNr())
+                .setPostcode(memberDTO.getPostcode())
+                .setCity(memberDTO.getCity())
+                .setPassword(memberDTO.getPassword())
+                .setRole(memberDTO.getRole());
+    }
+
+    public Member mapToMember(CreateMemberDTO memberDTO){
+        return new Member()
+                .setId(memberDTO.getId())
                 .setEmail(memberDTO.getEmail())
                 .setLastname(memberDTO.getFirstname())
                 .setNr(memberDTO.getNr())

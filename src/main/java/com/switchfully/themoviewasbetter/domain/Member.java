@@ -152,12 +152,12 @@ public class Member {
     }
 
     public static boolean fieldIsEmpty(String field) {
-        return !field.trim().isEmpty();
+        return field.trim().isEmpty();
     }
 
 
     public final void checkInss(String inss) {
-        if (!fieldIsEmpty(inss)) {
+        if (fieldIsEmpty(inss)) {
             throw new FieldIsEmptyException("INSS");
         }
         this.inss = inss;
@@ -171,14 +171,14 @@ public class Member {
     }
 
     public final void checkLastname(String lastname) {
-        if (!fieldIsEmpty(lastname)) {
+        if (fieldIsEmpty(lastname)) {
             throw new FieldIsEmptyException("lastName");
         }
         this.lastname = lastname;
     }
 
     public final void checkCity(String city) {
-        if (!fieldIsEmpty(city)) {
+        if (fieldIsEmpty(city)) {
             throw new FieldIsEmptyException("city");
         }
         this.city = city;

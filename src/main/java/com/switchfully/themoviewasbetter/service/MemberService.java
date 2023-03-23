@@ -1,6 +1,7 @@
 package com.switchfully.themoviewasbetter.service;
 
 import com.switchfully.themoviewasbetter.domain.Member;
+import com.switchfully.themoviewasbetter.dto.CreateMemberDTO;
 import com.switchfully.themoviewasbetter.dto.MemberDTO;
 import com.switchfully.themoviewasbetter.mapper.MemberMapper;
 import com.switchfully.themoviewasbetter.repository.MemberRepository;
@@ -29,11 +30,18 @@ public class MemberService {
         return mapper.mapToDTO(repository.getMember(id));
     }
 
-    public MemberDTO save(MemberDTO newMember){
+    public MemberDTO save(CreateMemberDTO newMember){
         Member memberToSave = mapper.mapToMember(newMember);
         return mapper.mapToDTO(repository.registerMember(memberToSave));
-
-
     }
 
+    public MemberDTO saveAdmin(MemberDTO newMember){
+        Member memberToSave = mapper.mapToMember(newMember);
+        return mapper.mapToDTO(repository.registerAdministrator(memberToSave));
+    }
+
+    public MemberDTO saveLibrarian(MemberDTO newMember){
+        Member memberToSave = mapper.mapToMember(newMember);
+        return mapper.mapToDTO(repository.registerLibrarian(memberToSave));
+    }
 }

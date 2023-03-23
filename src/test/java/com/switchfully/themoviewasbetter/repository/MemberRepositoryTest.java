@@ -2,6 +2,7 @@ package com.switchfully.themoviewasbetter.repository;
 
 import com.switchfully.themoviewasbetter.domain.Member;
 import com.switchfully.themoviewasbetter.exceptions.MemberNotUniqueException;
+import com.switchfully.themoviewasbetter.security.Role;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -34,7 +36,6 @@ class MemberRepositoryTest {
         members.put(member1.getEmail(), member1);
         members.put(member2.getEmail(), member2);
 
-        repository.registerMember(member1);
         repository.registerMember(member2);
     }
 
@@ -47,12 +48,12 @@ class MemberRepositoryTest {
 
         //WHEN
         //THEN
-        Assertions.assertThat(repository.getAllUsers()).contains(adminMain);
+        assertThat(repository.getAllUsers()).contains(adminMain);
     }
 
     @Test
     void getAllUsersContains2Users() {
-        Assertions.assertThat(repository.getAllUsers()).containsExactlyInAnyOrderElementsOf(members.values().stream().toList());
+        assertThat(repository.getAllUsers()).containsExactlyInAnyOrderElementsOf(members.values().stream().toList());
     }
 
     @Test
@@ -69,12 +70,12 @@ class MemberRepositoryTest {
         //WHEN
         repository.registerMember(member1);
         //THEN
-        Assertions.assertThat(repository.getAllUsers())
+        assertThat(repository.getAllUsers())
                 .contains(member1);
         //WHEN
         repository.registerMember(member2);
         //THEN
-        Assertions.assertThat(repository.getAllUsers())
+        assertThat(repository.getAllUsers())
                 .contains(member2);
     }
 
@@ -98,6 +99,28 @@ class MemberRepositoryTest {
                 repository.registerMember(member2));
         assertEquals(memberNotUniqueException.getMessage(), "Email address and/or INSS is not unique. " +
                 "Member already exists.");
+    }
+
+    @Test
+    void saveAdmin() {
+        Member adminMain = new Member("9999", "12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
+                "", "", "", "", "Gent", "XXX");
+        repository.registerAdministrator(adminMain);
+        assertThat(repository.getAllUsers()).contains(adminMain);
+
+        Member member = repository.getMember(adminMain.getEmail());
+        assertThat(member).extracting("role").isEqualTo(Role.ADMIN);
+    }
+
+    @Test
+    void saveLibrarian() {
+        Member librarian = new Member("9999", "12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
+                "", "", "", "", "Gent", "XXX");
+        repository.registerLibrarian(librarian);
+        assertThat(repository.getAllUsers()).contains(librarian);
+
+        Member member = repository.getMember(librarian.getEmail());
+        assertThat(member).extracting("role").isEqualTo(Role.LIBRARIAN);
     }
 
 
