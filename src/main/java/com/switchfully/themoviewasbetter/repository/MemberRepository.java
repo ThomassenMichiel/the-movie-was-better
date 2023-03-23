@@ -49,7 +49,11 @@ public class MemberRepository {
     }
 
     public Member registerLibrarian(Member member) {
-        throw new UnsupportedOperationException();
+        checkIfUserInssAndEmailAreUnique(member);
+
+        member.setRole(Role.LIBRARIAN);
+        repository.put(member.getEmail(), member);
+        return member;
     }
 
 
