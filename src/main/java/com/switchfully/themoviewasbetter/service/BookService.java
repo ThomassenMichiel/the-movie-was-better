@@ -1,12 +1,14 @@
 package com.switchfully.themoviewasbetter.service;
 
+import com.switchfully.themoviewasbetter.domain.Book;
 import com.switchfully.themoviewasbetter.dto.BookDTO;
+import com.switchfully.themoviewasbetter.exceptions.BookNotFoundException;
 import com.switchfully.themoviewasbetter.mapper.BookMapper;
 import com.switchfully.themoviewasbetter.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Service
 public class BookService {
@@ -18,7 +20,12 @@ public class BookService {
         this.mapper = mapper;
     }
 
-    public List<BookDTO> getAllBooks() {
-        return bookRepository.getAllBooks().stream().map(mapper::toDto).collect(Collectors.toList());
+    public List<BookDTO> getAllBooks(Map<String, String> params) {
+        return bookRepository.getAllBooks(params).stream().map(mapper::toDto).toList();
+    }
+
+    public BookDTO findByIsbn(String isbn) {
+        Book book = bookRepository.findByIsbn(isbn).orElseThrow(BookNotFoundException::new);
+        return mapper.toDto(book);
     }
 }

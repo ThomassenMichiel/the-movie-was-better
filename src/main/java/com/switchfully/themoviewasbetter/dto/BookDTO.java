@@ -3,16 +3,18 @@ package com.switchfully.themoviewasbetter.dto;
 import java.util.Objects;
 
 public class BookDTO {
-    private String isbn;
-    private String title;
-    private String authorFirstName;
-    private String authorLastName;
+    private final String isbn;
+    private final String title;
+    private final String authorFirstName;
+    private final String authorLastName;
+    private final String smallSummary;
 
-    public BookDTO(String isbn, String title, String authorFirstName, String authorLastName) {
+    public BookDTO(String isbn, String title, String authorFirstName, String authorLastName, String smallSummary) {
         this.isbn = isbn;
         this.title = title;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
+        this.smallSummary = smallSummary;
     }
 
     public String getIsbn() {
@@ -29,6 +31,10 @@ public class BookDTO {
 
     public String getAuthorLastName() {
         return authorLastName;
+    }
+
+    public String getSmallSummary() {
+        return smallSummary;
     }
 
     @Override
