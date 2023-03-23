@@ -1,6 +1,6 @@
 package com.switchfully.themoviewasbetter.security;
 
-import com.switchfully.themoviewasbetter.exceptions.UnauthorizatedException;
+import com.switchfully.themoviewasbetter.exceptions.UnauthorizedException;
 import com.switchfully.themoviewasbetter.exceptions.UnknownUserException;
 import com.switchfully.themoviewasbetter.exceptions.WrongPasswordException;
 import com.switchfully.themoviewasbetter.repository.MemberRepository;
@@ -38,7 +38,7 @@ public class SecurityService {
         }
         if (!user.canHaveAccessTo(feature)) {
             logger.error(format("User %s does not have access to %s", emailPassword.getEmail(), feature));
-            throw new UnauthorizatedException();
+            throw new UnauthorizedException();
         }
     }
     

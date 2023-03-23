@@ -52,4 +52,9 @@ public class MemberRepository {
     }
 
 
+    private boolean checkIfUserInssAndEmailAreUnique(Member newMember) {
+        return this.repository.values().stream().map(Member::getEmail).anyMatch(email -> email.equals(newMember.getEmail()))
+                || this.repository.values().stream().map(Member::getInss).anyMatch(inss -> inss.equals(newMember.getInss()));
+    }
+
 }

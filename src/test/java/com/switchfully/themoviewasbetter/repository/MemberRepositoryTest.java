@@ -64,7 +64,7 @@ class MemberRepositoryTest {
     void registerNewMember() {
         //GIVEN
 
-        var member1 = new Member("1", "123", "sven@gmail.com"
+        var member1 = new Member("4", "126", "sven2@gmail.com"
                 , "Van Gastel", "Sven", "molenstraat",
                 "28", "2920", "Kalmthout", "passwoordTest");
         var member2 = new Member("5", "127", "sven28447815@gmail.com"
@@ -103,4 +103,6 @@ class MemberRepositoryTest {
         assertEquals(memberNotUniqueException.getMessage(), "Email address and/or INSS is not unique. " +
                 "Member already exists.");
     }
+
+
 }

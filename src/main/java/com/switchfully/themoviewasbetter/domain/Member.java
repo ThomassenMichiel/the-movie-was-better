@@ -48,8 +48,8 @@ public class Member {
         return id;
     }
 
-    public String getINSS() {
-        return INSS;
+    public String getInss() {
+        return inss;
     }
 
     public String getEmail() {
@@ -95,8 +95,8 @@ public class Member {
         return this;
     }
 
-    public Member setINSS(String INSS) {
-        this.INSS = INSS;
+    public Member setInss(String inss) {
+        this.inss = inss;
         return this;
     }
 
@@ -197,12 +197,12 @@ public class Member {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member user = (Member) o;
-        return Objects.equals(INSS, user.INSS) && Objects.equals(email, user.email);
+        return Objects.equals(inss, user.inss) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(INSS, email);
+        return Objects.hash(inss, email);
     }
 
 

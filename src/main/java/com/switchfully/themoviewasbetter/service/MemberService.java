@@ -18,18 +18,18 @@ public class MemberService {
         this.mapper = mapper;
     }
 
-    public List<MemberDTO> getAllUsers(){
+    public List<MemberDTO> findAll(){
         return repository.getAllUsers()
                 .stream()
-                .map(member -> mapper.mapToDTO(member))
+                .map(mapper::mapToDTO)
                 .toList();
     }
 
-    public MemberDTO getMemberbyDTO(String id) {
+    public MemberDTO findById(String id) {
         return mapper.mapToDTO(repository.getMember(id));
     }
 
-    public MemberDTO saveMember(MemberDTO newMember){
+    public MemberDTO save(MemberDTO newMember){
         Member memberToSave = mapper.mapToMember(newMember);
         return mapper.mapToDTO(repository.registerMember(memberToSave));
 

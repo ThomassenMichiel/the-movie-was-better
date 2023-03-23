@@ -10,7 +10,7 @@ public class MemberMapper {
     public MemberDTO mapToDTO(Member member){
         return new MemberDTO()
                 .setId(member.getId())
-                .setINSS(member.getINSS())
+                .setINSS(member.getInss())
                 .setEmail(member.getEmail())
                 .setLastname(member.getFirstname())
                 .setNr(member.getNr())
@@ -23,7 +23,7 @@ public class MemberMapper {
     public Member mapToMember(MemberDTO memberDTO){
         return new Member()
                 .setId(memberDTO.getId())
-                .setINSS(memberDTO.getINSS())
+                .setInss(memberDTO.getINSS())
                 .setEmail(memberDTO.getEmail())
                 .setLastname(memberDTO.getFirstname())
                 .setNr(memberDTO.getNr())
