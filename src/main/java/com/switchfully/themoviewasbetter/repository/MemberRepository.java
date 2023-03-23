@@ -1,6 +1,7 @@
 package com.switchfully.themoviewasbetter.repository;
 
 import com.switchfully.themoviewasbetter.domain.Member;
+import com.switchfully.themoviewasbetter.exceptions.MemberNotUniqueException;
 import com.switchfully.themoviewasbetter.security.Role;
 import org.springframework.stereotype.Repository;
 
@@ -18,8 +19,8 @@ public class MemberRepository {
     }
 
     private static Member putAdminMain() {
-        Member adminMain = new Member("0", "123", "pieter.pauwels13@gmail.com", "", "",
-                "", "", "", "", "XXX");
+        Member adminMain = new Member("0", "123", "pieter.pauwels13@gmail.com", "Pauwels", "",
+                "", "", "", "Gent", "XXX");
         adminMain.setRole(Role.ADMIN);
         return adminMain;
     }
@@ -28,9 +29,12 @@ public class MemberRepository {
         return repository.values();
     }
 
-    public Member registerMember(Member user) {
-        repository.put(user.getId(), user);
-        return user;
+    public Member registerMember(Member newMember) {
+        if(checkIfUserInssAndEmailAreUnique(newMember)) {
+            throw new MemberNotUniqueException();
+        }
+        repository.put(newMember.getEmail(), newMember);
+        return newMember;
 
     }
 

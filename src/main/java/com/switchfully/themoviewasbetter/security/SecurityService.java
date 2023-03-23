@@ -41,16 +41,7 @@ public class SecurityService {
             throw new UnauthorizatedException();
         }
     }
-
-    //    private Credentials getUsernamePassword(String authorization) {
-//        String decodedUsernameAndPassword = new String(Base64.getDecoder()
-//                .decode(authorization.substring("Basic ".length())));
-//        String username = decodedUsernameAndPassword
-//                .substring(0, decodedUsernameAndPassword.indexOf(":"));
-//        String password = decodedUsernameAndPassword
-//                .substring(decodedUsernameAndPassword.indexOf(":") + 1);
-//        return new Credentials(username, password);
-//    }
+    
     private Credentials getUsernamePassword(String authorization) {
         String decodedUsernameAndPassword = new String(Base64.getDecoder()
                 .decode(authorization.substring("".length())));
