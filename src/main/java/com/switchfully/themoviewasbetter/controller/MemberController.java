@@ -6,11 +6,8 @@ import com.switchfully.themoviewasbetter.dto.MemberDTO;
 import com.switchfully.themoviewasbetter.exceptions.UnauthorizedException;
 import com.switchfully.themoviewasbetter.exceptions.UnknownUserException;
 import com.switchfully.themoviewasbetter.exceptions.WrongPasswordException;
-import com.switchfully.themoviewasbetter.security.Feature;
 import com.switchfully.themoviewasbetter.security.SecurityService;
 import com.switchfully.themoviewasbetter.service.MemberService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestHeaderException;
@@ -26,7 +23,6 @@ import static com.switchfully.themoviewasbetter.security.Feature.REGISTER_ADMIN;
 public class MemberController {
     private final MemberService memberService;
     private final SecurityService securityService;
-    private final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     public MemberController(MemberService service, SecurityService securityService) {
         this.memberService = service;
@@ -34,7 +30,7 @@ public class MemberController {
     }
 
     @GetMapping()
-    public List<MemberDTO> getAllMembers(@RequestHeader String authorization) {
+    public List<MemberDTO> findAll(@RequestHeader String authorization) {
         securityService.validateAuthorization(authorization, GET_ALL_USERS);
         return memberService.findAll();
     }
@@ -46,7 +42,7 @@ public class MemberController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO saveMember(@RequestBody CreateMemberDTO newMember) {
+    public MemberDTO save(@RequestBody CreateMemberDTO newMember) {
         return memberService.save(newMember);
     }
 
