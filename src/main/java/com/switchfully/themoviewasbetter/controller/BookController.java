@@ -29,6 +29,7 @@ public class BookController {
     @ResponseStatus(OK)
     public BookDTO getBookDetails(@PathVariable String isbn){
         return bookService.findByIsbn(isbn);
+
     }
 
 
