@@ -1,5 +1,6 @@
 package com.switchfully.themoviewasbetter.controller;
 
+import com.switchfully.themoviewasbetter.domain.Book;
 import com.switchfully.themoviewasbetter.domain.Member;
 import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
 import com.switchfully.themoviewasbetter.security.SecurityService;
@@ -58,4 +59,6 @@ public class BookRentalController {
         securityService.validateAuthorization(authorization, GET_ALL_DUE_RENTALS);
         return service.getAllBookRentalsByDueDate();
     }
+
+
 }

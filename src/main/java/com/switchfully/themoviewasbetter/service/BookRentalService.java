@@ -1,8 +1,10 @@
 package com.switchfully.themoviewasbetter.service;
 
+import com.switchfully.themoviewasbetter.domain.Book;
 import com.switchfully.themoviewasbetter.domain.BookRental;
 import com.switchfully.themoviewasbetter.domain.Member;
 import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
+import com.switchfully.themoviewasbetter.dto.RentedBookDTO;
 import com.switchfully.themoviewasbetter.mapper.BookRentalMapper;
 import com.switchfully.themoviewasbetter.repository.BookRentalRepository;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,13 @@ public class BookRentalService {
         return mapper.listToDto(bookRentalRepository.getAllBooks()
                 .stream()
                 .filter(x -> LocalDate.now().isAfter(x.getReturnDate()))
+                .collect(Collectors.toList()));
+    }
+
+    public List<RentedBookDTO> isBookRented(Book book){
+        return mapper.listToRentedBooksDto(bookRentalRepository.getAllBooks()
+                .stream()
+                .filter(x -> book.getTitle().equals(x.getBook().getTitle()))
                 .collect(Collectors.toList()));
     }
 }

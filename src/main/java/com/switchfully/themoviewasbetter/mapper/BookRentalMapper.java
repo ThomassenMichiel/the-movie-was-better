@@ -3,6 +3,7 @@ package com.switchfully.themoviewasbetter.mapper;
 import com.switchfully.themoviewasbetter.domain.Book;
 import com.switchfully.themoviewasbetter.domain.BookRental;
 import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
+import com.switchfully.themoviewasbetter.dto.RentedBookDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,4 +28,16 @@ public class BookRentalMapper {
         return new BookRental(bookRentalDto.getId(), bookRentalDto.getMember(), bookRentalDto.getBook(), bookRentalDto.getReturnDate());
     }
 
+    public RentedBookDTO toRentedBookDTO(BookRental bookRental){
+        return new RentedBookDTO(bookRental.getMember().getFirstname() + " " + bookRental.getMember().getLastname());
+    }
+
+    public List<RentedBookDTO> listToRentedBooksDto(List<BookRental> bookRentalList){
+        List<RentedBookDTO> bookRentalDtoList = new ArrayList<>();
+        for (BookRental bookRental : bookRentalList) {
+            RentedBookDTO rentedBookDTO = toRentedBookDTO(bookRental);
+            bookRentalDtoList.add(rentedBookDTO);
+        }
+        return bookRentalDtoList;
+    }
 }
