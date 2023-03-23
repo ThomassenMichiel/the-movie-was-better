@@ -32,8 +32,10 @@ public class MemberService {
     public MemberDTO save(MemberDTO newMember){
         Member memberToSave = mapper.mapToMember(newMember);
         return mapper.mapToDTO(repository.registerMember(memberToSave));
-
-
     }
 
+    public MemberDTO saveAdmin(MemberDTO newMember){
+        Member memberToSave = mapper.mapToMember(newMember);
+        return mapper.mapToDTO(repository.registerAdministrator(memberToSave));
+    }
 }

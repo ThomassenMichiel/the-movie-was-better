@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.switchfully.themoviewasbetter.security.Feature.GET_ALL_USERS;
+import static com.switchfully.themoviewasbetter.security.Feature.REGISTER_ADMIN;
 
 @RestController
 @RequestMapping("members")
@@ -39,6 +40,12 @@ public class MemberController {
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDTO saveMember(@RequestBody MemberDTO newMember) {
         return memberService.save(newMember);
+    }
 
+    @PostMapping("/admins")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MemberDTO saveAdmin(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
+        securityService.validateAuthorization(authorization, REGISTER_ADMIN);
+        return memberService.saveAdmin(newMember);
     }
 }

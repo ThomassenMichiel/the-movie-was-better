@@ -5,7 +5,6 @@ import com.switchfully.themoviewasbetter.exceptions.MemberNotUniqueException;
 import com.switchfully.themoviewasbetter.security.Role;
 import org.springframework.stereotype.Repository;
 
-
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -29,20 +28,23 @@ public class MemberRepository {
         return repository.values();
     }
 
-    public Member registerMember(Member newMember) {
-        if(checkIfUserInssAndEmailAreUnique(newMember)) {
-            throw new MemberNotUniqueException();
-        }
-        repository.put(newMember.getEmail(), newMember);
-        return newMember;
+    public Member registerMember(Member member) {
+        checkIfUserInssAndEmailAreUnique(member);
+
+        repository.put(member.getEmail(), member);
+        return member;
 
     }
 
-    public Member registerAdministrator(Member user) {
-        throw new UnsupportedOperationException();
+    public Member registerAdministrator(Member member) {
+        checkIfUserInssAndEmailAreUnique(member);
+
+        member.setRole(Role.ADMIN);
+        repository.put(member.getEmail(), member);
+        return member;
     }
 
-    public Member registerLibrarian(Member user) {
+    public Member registerLibrarian(Member member) {
         throw new UnsupportedOperationException();
     }
 
@@ -52,9 +54,11 @@ public class MemberRepository {
     }
 
 
-    private boolean checkIfUserInssAndEmailAreUnique(Member newMember) {
-        return this.repository.values().stream().map(Member::getEmail).anyMatch(email -> email.equals(newMember.getEmail()))
-                || this.repository.values().stream().map(Member::getInss).anyMatch(inss -> inss.equals(newMember.getInss()));
+    private void checkIfUserInssAndEmailAreUnique(Member newMember) {
+        if (this.repository.values().stream().map(Member::getEmail).anyMatch(email -> email.equals(newMember.getEmail()))
+                || this.repository.values().stream().map(Member::getInss).anyMatch(inss -> inss.equals(newMember.getInss()))) {
+            throw new MemberNotUniqueException();
+        }
     }
 
 }
