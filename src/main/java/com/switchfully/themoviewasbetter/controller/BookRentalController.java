@@ -1,10 +1,10 @@
 package com.switchfully.themoviewasbetter.controller;
 
 import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
+import com.switchfully.themoviewasbetter.dto.ReturnedBookRentalDTO;
 import com.switchfully.themoviewasbetter.service.BookRentalService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -27,12 +27,8 @@ public class BookRentalController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
-    public String delete(@RequestBody BookRentalDTO bookRentalToReturn){
-        service.delete(bookRentalToReturn);
-        if (bookRentalToReturn.getReturnDate().isBefore(LocalDate.now())){
-            return "You are late in returning this book!";
-        }
-        return "Thank you for returning this book.";
+    public ReturnedBookRentalDTO delete(@RequestBody BookRentalDTO bookRentalToReturn){
+        return new ReturnedBookRentalDTO(service.delete(bookRentalToReturn));
     }
 
     @GetMapping()
