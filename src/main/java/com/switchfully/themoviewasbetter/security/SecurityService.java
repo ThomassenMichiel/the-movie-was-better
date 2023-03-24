@@ -23,7 +23,7 @@ public class SecurityService {
 
     public void validateAuthorization(String authorization, Feature feature) {
         Credentials emailPassword = getCredentials(authorization);
-        Member user = memberRepository.findById(emailPassword.getEmail());
+        Member user = memberRepository.findByEmail(emailPassword.getEmail());
 
         if (user == null) {
             logger.error("Unknown user {}", emailPassword.getEmail());
@@ -42,7 +42,7 @@ public class SecurityService {
     private Credentials getCredentials(String authorization) {
         try {
             String decodedUsernameAndPassword = new String(Base64.getDecoder()
-                    .decode(authorization.substring("".length())));
+                    .decode(authorization.substring("Basic ".length())));
             logger.error("decodedUsernameAndPassword: {}", decodedUsernameAndPassword);
             String username = decodedUsernameAndPassword
                     .substring(0, decodedUsernameAndPassword.indexOf(":"));
