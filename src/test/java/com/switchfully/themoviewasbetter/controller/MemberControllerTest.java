@@ -16,7 +16,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class MemberControllerTest {
-    private static final String DUMMY_AUTH_KEY = "cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY";
+    private static final String DUMMY_AUTH_KEY = "BASIC cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY";
     private MemberController controller;
 
     @BeforeEach

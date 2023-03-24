@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("Member service test")
 class MemberServiceTest {
-    private static final String DUMMY_AUTH_KEY = "cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY";
+    private static final String DUMMY_AUTH_KEY = "BASIC cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY";
     private MemberMapper mapper;
     private MemberRepository repository;
     private MemberService service;

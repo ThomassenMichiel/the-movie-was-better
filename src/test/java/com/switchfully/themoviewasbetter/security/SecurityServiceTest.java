@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SecurityServiceTest {
-    private static final String DUMMY_AUTH_KEY = "cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY";
+    private static final String DUMMY_AUTH_KEY = "BASIC cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY";
     private SecurityService service;
 
     @BeforeEach
@@ -29,21 +29,21 @@ class SecurityServiceTest {
     @Test
     @DisplayName("Unknown user")
     void unknownUser() {
-        assertThatThrownBy(() -> service.validateAuthorization("bWljaGllbEBnbWFpbC5jb206cHc=", Feature.REGISTER_ADMIN))
+        assertThatThrownBy(() -> service.validateAuthorization("BASIC bWljaGllbEBnbWFpbC5jb206cHc=", Feature.REGISTER_ADMIN))
                 .isInstanceOf(UnknownUserException.class);
     }
 
     @Test
     @DisplayName("Wrong password")
     void wrongPassword() {
-        assertThatThrownBy(() -> service.validateAuthorization("cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206cHdlZWVl", Feature.REGISTER_ADMIN))
+        assertThatThrownBy(() -> service.validateAuthorization("BASIC cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206cHdlZWVl", Feature.REGISTER_ADMIN))
                 .isInstanceOf(WrongPasswordException.class);
     }
 
     @Test
     @DisplayName("Insufficient role")
     void insufficientRole() {
-        assertThatThrownBy(() -> service.validateAuthorization("c3ZlbkBnbWFpbC5jb206cGFzc3dvb3JkVGVzdA==", Feature.REGISTER_ADMIN))
+        assertThatThrownBy(() -> service.validateAuthorization("BASIC c3ZlbkBnbWFpbC5jb206cGFzc3dvb3JkVGVzdA==", Feature.REGISTER_ADMIN))
                 .isInstanceOf(UnauthorizedException.class);
     }
 }
