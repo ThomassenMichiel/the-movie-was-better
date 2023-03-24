@@ -30,5 +30,9 @@ public class BookController {
         return bookService.findByIsbn(isbn);
     }
 
-
+    @GetMapping("/{isbn}/advanced")
+    @ResponseStatus(OK)
+    public BookDTO getAdvancedBookDetails(@PathVariable String isbn){
+        return bookService.findByIsbn(isbn);
+    }
 }

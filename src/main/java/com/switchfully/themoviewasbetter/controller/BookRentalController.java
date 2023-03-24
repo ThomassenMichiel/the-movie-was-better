@@ -1,6 +1,7 @@
 package com.switchfully.themoviewasbetter.controller;
 
 import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
+import com.switchfully.themoviewasbetter.dto.RentedBookDTO;
 import com.switchfully.themoviewasbetter.dto.ReturnedBookRentalDTO;
 import com.switchfully.themoviewasbetter.service.BookRentalService;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +28,16 @@ public class BookRentalController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    //by id, zoals getRentedBook
     public ReturnedBookRentalDTO delete(@RequestBody BookRentalDTO bookRentalToReturn){
         return new ReturnedBookRentalDTO(service.delete(bookRentalToReturn));
     }
+    @GetMapping("/{isbn}")
+    @ResponseStatus(OK)
+    public RentedBookDTO getRentedBook(@RequestParam String isbn){
+        return service.find(isbn);
+    }
+
 
     @GetMapping()
     @ResponseStatus(OK)
