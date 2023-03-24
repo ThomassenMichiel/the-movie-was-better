@@ -2,7 +2,6 @@ package com.switchfully.themoviewasbetter.controller;
 
 import com.switchfully.themoviewasbetter.dto.CreateMemberDTO;
 import com.switchfully.themoviewasbetter.dto.MemberDTO;
-import com.switchfully.themoviewasbetter.exceptions.UnauthorizedException;
 import com.switchfully.themoviewasbetter.mapper.MemberMapper;
 import com.switchfully.themoviewasbetter.repository.MemberRepository;
 import com.switchfully.themoviewasbetter.security.Role;
@@ -44,7 +43,7 @@ class MemberControllerTest {
                 , "Van Gastel", "Sven", "molenstraat",
                 "28", "2920", "Kalmthout", Role.MEMBER);
 
-        MemberDTO answer = controller.findById(member.getEmail());
+        MemberDTO answer = controller.findByEmail(member.getEmail());
 
         assertThat(answer).isEqualTo(member);
     }

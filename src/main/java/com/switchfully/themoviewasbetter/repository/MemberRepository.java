@@ -41,8 +41,8 @@ public class MemberRepository {
     }
 
 
-    public Member findById(String id) {
-        return repository.get(id);
+    public Member findByEmail(String email) {
+        return repository.get(email);
     }
 
 

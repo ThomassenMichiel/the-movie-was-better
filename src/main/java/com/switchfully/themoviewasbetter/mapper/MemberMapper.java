@@ -13,6 +13,6 @@ public class MemberMapper {
     }
 
     public Member toDomain(CreateMemberDTO memberDTO){
-        return new Member(memberDTO.getInss(),memberDTO.getEmail(), memberDTO.getLastname(), memberDTO.getFirstname(), memberDTO.getStreetName(), memberDTO.getNr(), memberDTO.getPostcode(), memberDTO.getCity(), memberDTO.getPassword(), memberDTO.getRole());
+        return new Member(memberDTO.getInss(),memberDTO.getEmail(), memberDTO.getLastname(), memberDTO.getFirstname(), memberDTO.getStreetName(), memberDTO.getNumber(), memberDTO.getPostcode(), memberDTO.getCity(), memberDTO.getPassword(), memberDTO.getRole());
     }
 }
