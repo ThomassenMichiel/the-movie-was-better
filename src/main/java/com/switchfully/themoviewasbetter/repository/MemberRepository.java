@@ -15,24 +15,24 @@ public class MemberRepository {
 
     public MemberRepository() {
         this.repository.put("pieter.pauwels13@gmail.com", putAdminMain());
-        var member1 = new Member("1", "124", "sven@gmail.com"
+        Member member = new Member("124", "sven@gmail.com"
                 , "Van Gastel", "Sven", "molenstraat",
                 "28", "2920", "Kalmthout", "passwoordTest");
-        repository.put(member1.getEmail(), member1);
+        repository.put(member.getEmail(), member);
     }
 
     private static Member putAdminMain() {
-        Member adminMain = new Member("0", "123", "pieter.pauwels13@gmail.com", "Pauwels", "",
+        Member admin = new Member("123", "pieter.pauwels13@gmail.com", "Pauwels", "",
                 "", "", "", "Gent", "XXX"); // cGlldGVyLnBhdXdlbHMxM0BnbWFpbC5jb206WFhY
-        adminMain.setRole(Role.ADMIN);
-        return adminMain;
+        admin.setRole(Role.ADMIN);
+        return admin;
     }
 
-    public Collection<Member> getAllUsers() {
+    public Collection<Member> findAll() {
         return repository.values();
     }
 
-    public Member registerMember(Member member) {
+    public Member create(Member member) {
         checkIfUserInssAndEmailAreUnique(member);
 
         repository.put(member.getEmail(), member);
@@ -40,24 +40,8 @@ public class MemberRepository {
 
     }
 
-    public Member registerAdministrator(Member member) {
-        checkIfUserInssAndEmailAreUnique(member);
 
-        member.setRole(Role.ADMIN);
-        repository.put(member.getEmail(), member);
-        return member;
-    }
-
-    public Member registerLibrarian(Member member) {
-        checkIfUserInssAndEmailAreUnique(member);
-
-        member.setRole(Role.LIBRARIAN);
-        repository.put(member.getEmail(), member);
-        return member;
-    }
-
-
-    public Member getMember(String id) {
+    public Member findById(String id) {
         return repository.get(id);
     }
 
