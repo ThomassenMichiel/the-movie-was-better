@@ -58,7 +58,7 @@ class MemberServiceTest {
                 "", "", "", "Gent", "XXX");
         MemberDTO adminDto = mapper.toDto(admin);
 
-        MemberDTO answer = service.findById(admin.getEmail());
+        MemberDTO answer = service.findByEmail(admin.getEmail());
 
         assertThat(answer).isEqualTo(adminDto);
     }

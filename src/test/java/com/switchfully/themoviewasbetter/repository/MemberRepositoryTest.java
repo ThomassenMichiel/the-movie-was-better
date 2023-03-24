@@ -48,7 +48,7 @@ class MemberRepositoryTest {
         repository.create(librarian);
         assertThat(repository.findAll()).contains(librarian);
 
-        Member member = repository.findById(librarian.getEmail());
+        Member member = repository.findByEmail(librarian.getEmail());
         assertThat(member).extracting("role").isEqualTo(LIBRARIAN);
     }
 

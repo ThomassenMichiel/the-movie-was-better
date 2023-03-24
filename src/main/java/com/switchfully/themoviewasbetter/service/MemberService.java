@@ -35,8 +35,8 @@ public class MemberService {
                 .toList();
     }
 
-    public MemberDTO findById(String id) {
-        return mapper.toDto(repository.findById(id));
+    public MemberDTO findByEmail(String email) {
+        return mapper.toDto(repository.findByEmail(email));
     }
 
     public MemberDTO create(String authorization, CreateMemberDTO newMember) {

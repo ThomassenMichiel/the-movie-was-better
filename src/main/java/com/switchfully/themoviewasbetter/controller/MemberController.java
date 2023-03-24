@@ -28,9 +28,9 @@ public class MemberController {
         return memberService.findAll(authorization);
     }
 
-    @GetMapping(path = "/{id}")
-    public MemberDTO findById(@PathVariable("id") String id) {
-        return memberService.findById(id);
+    @GetMapping(path = "/{email}")
+    public MemberDTO findByEmail(@PathVariable("email") String id) {
+        return memberService.findByEmail(id);
     }
 
     @PostMapping()
