@@ -23,7 +23,7 @@ public class SecurityService {
 
     public void validateAuthorization(String authorization, Feature feature) {
         Credentials emailPassword = getCredentials(authorization);
-        Member user = memberRepository.getMember(emailPassword.getEmail());
+        Member user = memberRepository.findById(emailPassword.getEmail());
 
         if (user == null) {
             logger.error("Unknown user {}", emailPassword.getEmail());

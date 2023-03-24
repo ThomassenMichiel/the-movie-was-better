@@ -38,17 +38,17 @@ class MemberRepositoryTest {
         members.put(member1.getEmail(), member1);
         members.put(member2.getEmail(), member2);
 
-        repository.registerMember(member2);
+        repository.create(member2);
     }
 
     @Test
     void saveLibrarian() {
         Member librarian = new Member("12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
                 "", "", "", "", "Gent", "XXX", LIBRARIAN);
-        repository.registerMember(librarian);
-        assertThat(repository.getAllUsers()).contains(librarian);
+        repository.create(librarian);
+        assertThat(repository.findAll()).contains(librarian);
 
-        Member member = repository.getMember(librarian.getEmail());
+        Member member = repository.findById(librarian.getEmail());
         assertThat(member).extracting("role").isEqualTo(LIBRARIAN);
     }
 
@@ -58,7 +58,7 @@ class MemberRepositoryTest {
         @Test
         @DisplayName("Find all users")
         void getAllUsers_contains2Users() {
-            assertThat(repository.getAllUsers()).containsExactlyInAnyOrderElementsOf(members.values().stream().toList());
+            assertThat(repository.findAll()).containsExactlyInAnyOrderElementsOf(members.values().stream().toList());
         }
     }
 
@@ -70,7 +70,7 @@ class MemberRepositoryTest {
         void registerMember() {
             Member adminMain = new Member("123", "pieter.pauwels13@gmail.com", "Pauwels",
                     "", "", "", "", "Gent", "XXX");
-            assertThat(repository.getAllUsers()).contains(adminMain);
+            assertThat(repository.findAll()).contains(adminMain);
         }
 
         @Test
@@ -83,11 +83,11 @@ class MemberRepositoryTest {
                     , "Van Gastel", "Sven", "molenstraat",
                     "28", "2920", "Kalmthout", "passwoordTest");
 
-            repository.registerMember(member1);
-            assertThat(repository.getAllUsers())
+            repository.create(member1);
+            assertThat(repository.findAll())
                     .contains(member1);
-            repository.registerMember(member2);
-            assertThat(repository.getAllUsers())
+            repository.create(member2);
+            assertThat(repository.findAll())
                     .contains(member2);
         }
 
@@ -96,8 +96,8 @@ class MemberRepositoryTest {
         void saveAdmin() {
             Member adminMain = new Member("12399999", "pieter.pauwels13999999@gmail.com", "Pauwels",
                     "", "", "", "", "Gent", "XXX", ADMIN);
-            Member member = repository.registerMember(adminMain);
-            assertThat(repository.getAllUsers()).contains(adminMain);
+            Member member = repository.create(adminMain);
+            assertThat(repository.findAll()).contains(adminMain);
 
             assertThat(member).extracting("role").isEqualTo(ADMIN);
         }
@@ -112,7 +112,7 @@ class MemberRepositoryTest {
                         , "Van Gast", "erik", "molenbaan",
                         "3", "2000", "Antwerrpen", "passwoordTest");
                 MemberNotUniqueException memberNotUniqueException = assertThrows(MemberNotUniqueException.class, () ->
-                        repository.registerMember(member2));
+                        repository.create(member2));
                 assertEquals(memberNotUniqueException.getMessage(), "Email address and/or INSS is not unique. " +
                         "Member already exists.");
             }
@@ -124,7 +124,7 @@ class MemberRepositoryTest {
                         , "Van Gast", "erik", "molenbaan",
                         "3", "2000", "Antwerrpen", "passwoordTest");
                 MemberNotUniqueException memberNotUniqueException = assertThrows(MemberNotUniqueException.class, () ->
-                        repository.registerMember(member2));
+                        repository.create(member2));
                 assertEquals(memberNotUniqueException.getMessage(), "Email address and/or INSS is not unique. " +
                         "Member already exists.");
             }

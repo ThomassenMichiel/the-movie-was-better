@@ -28,11 +28,11 @@ public class MemberRepository {
         return admin;
     }
 
-    public Collection<Member> getAllUsers() {
+    public Collection<Member> findAll() {
         return repository.values();
     }
 
-    public Member registerMember(Member member) {
+    public Member create(Member member) {
         checkIfUserInssAndEmailAreUnique(member);
 
         repository.put(member.getEmail(), member);
@@ -41,7 +41,7 @@ public class MemberRepository {
     }
 
 
-    public Member getMember(String id) {
+    public Member findById(String id) {
         return repository.get(id);
     }
 

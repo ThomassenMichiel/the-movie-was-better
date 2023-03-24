@@ -19,7 +19,6 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-
     public MemberController(MemberService service) {
         this.memberService = service;
     }
@@ -37,7 +36,7 @@ public class MemberController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDTO create(@RequestHeader String authorization, @RequestBody CreateMemberDTO newMember) {
-        return memberService.save(authorization, newMember);
+        return memberService.create(authorization, newMember);
     }
 
     @ExceptionHandler({MissingRequestHeaderException.class})

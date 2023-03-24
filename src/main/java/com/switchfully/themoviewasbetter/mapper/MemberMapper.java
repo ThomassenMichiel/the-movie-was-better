@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class MemberMapper {
 
     public MemberDTO toDto(Member member){
-        return new MemberDTO(member.getEmail(), member.getLastname(), member.getFirstname(), member.getStreetName(), member.getNr(), member.getPostcode(), member.getCity(), member.getRole());
+        return new MemberDTO(member.getEmail(), member.getLastname(), member.getFirstname(), member.getStreetName(), member.getNumber(), member.getPostcode(), member.getCity(), member.getRole());
     }
 
     public Member toDomain(CreateMemberDTO memberDTO){

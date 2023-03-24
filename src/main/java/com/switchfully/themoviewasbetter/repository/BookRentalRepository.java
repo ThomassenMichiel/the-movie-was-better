@@ -24,7 +24,7 @@ public class BookRentalRepository {
         return bookRental;
     }
     public void delete(BookRental bookRental){
-        repository.remove(bookRental.getId() , bookRental);
+        repository.remove(bookRental.getId() /*, bookRental*/);
     }
 
     public List<BookRental> findAll() {

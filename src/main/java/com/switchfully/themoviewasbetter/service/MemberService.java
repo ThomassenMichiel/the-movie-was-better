@@ -29,21 +29,21 @@ public class MemberService {
 
     public List<MemberDTO> findAll(String authorization) {
         securityService.validateAuthorization(authorization, GET_ALL_USERS);
-        return repository.getAllUsers()
+        return repository.findAll()
                 .stream()
                 .map(mapper::toDto)
                 .toList();
     }
 
     public MemberDTO findById(String id) {
-        return mapper.toDto(repository.getMember(id));
+        return mapper.toDto(repository.findById(id));
     }
 
-    public MemberDTO save(String authorization, CreateMemberDTO newMember) {
+    public MemberDTO create(String authorization, CreateMemberDTO newMember) {
         if (newMember.getRole() == ADMIN || newMember.getRole() == LIBRARIAN) {
             securityService.validateAuthorization(authorization, Feature.REGISTER_ADMIN);
         }
         Member memberToSave = mapper.toDomain(newMember);
-        return mapper.toDto(repository.registerMember(memberToSave));
+        return mapper.toDto(repository.create(memberToSave));
     }
 }

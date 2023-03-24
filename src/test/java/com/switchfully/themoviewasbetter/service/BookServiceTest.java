@@ -35,7 +35,7 @@ class BookServiceTest {
         Book fellowShipOfTheRing = new Book("9780345339706", "Lord of the Rings: Fellowship of the Ring", "J.R.R.", "Tolkien", "they're taking hobbits to isengard");
         Book theComingStorm = new Book("9781423100188", "The Coming Storm (Pirates of the Caribbean: Jack Sparrow, No. 1)", "Rob", "Kidd", "I've got a jar of dirt");
 
-        List<BookDTO> answer = service.findAllBooks(new HashMap<>());
+        List<BookDTO> answer = service.findAll(new HashMap<>());
 
         assertThat(answer).hasSize(5);
         assertThat(answer).extracting(BookDTO::getIsbn).contains(harryPotter.getIsbn(), harryPotter2.getIsbn(), harryPotter3.getIsbn(), fellowShipOfTheRing.getIsbn(), theComingStorm.getIsbn());

@@ -21,7 +21,7 @@ public class BookController {
     @GetMapping
     @ResponseStatus(OK)
     public List<BookDTO> findAllBooks(@RequestParam Map<String, String> params) {
-        return bookService.findAllBooks(params);
+        return bookService.findAll(params);
     }
 
     @GetMapping("/{isbn}")

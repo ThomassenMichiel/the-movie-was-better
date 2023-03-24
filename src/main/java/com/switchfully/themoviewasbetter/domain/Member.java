@@ -16,7 +16,7 @@ public class Member {
     private String lastname; //not null
     private String firstname;
     private String streetName;
-    private String nr;
+    private String number;
     private String postcode;
     private String city; // not null
     private String password;
@@ -39,7 +39,7 @@ public class Member {
         checkLastname(lastname);
         this.firstname = firstname;
         this.streetName = streetName;
-        this.nr = nr;
+        this.number = nr;
         this.postcode = postcode;
         checkCity(city);
         this.password = password;
@@ -68,8 +68,8 @@ public class Member {
         return streetName;
     }
 
-    public String getNr() {
-        return nr;
+    public String getNumber() {
+        return number;
     }
 
     public String getPostcode() {
@@ -116,8 +116,8 @@ public class Member {
         return this;
     }
 
-    public Member setNr(String nr) {
-        this.nr = nr;
+    public Member setNumber(String number) {
+        this.number = number;
         return this;
     }
 

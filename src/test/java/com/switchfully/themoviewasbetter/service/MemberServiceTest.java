@@ -72,7 +72,7 @@ class MemberServiceTest {
             CreateMemberDTO createMemberDto = new CreateMemberDTO("inss", "mail@mail.mail", "lastname","firstname","streetname","number","postcode","city","password", Role.MEMBER);
             MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNr(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
 
-            MemberDTO answer = service.save(DUMMY_AUTH_KEY,createMemberDto);
+            MemberDTO answer = service.create(DUMMY_AUTH_KEY,createMemberDto);
 
             assertThat(answer).isEqualTo(memberDto);
         }
@@ -83,7 +83,7 @@ class MemberServiceTest {
             CreateMemberDTO createMemberDto = new CreateMemberDTO("inss", "mail@mail.mail", "lastname","firstname","streetname","number","postcode","city","password", Role.MEMBER);
             MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNr(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
 
-            MemberDTO answer = service.save(null,createMemberDto);
+            MemberDTO answer = service.create(null,createMemberDto);
 
             assertThat(answer).isEqualTo(memberDto);
         }
@@ -98,7 +98,7 @@ class MemberServiceTest {
             CreateMemberDTO createMemberDto = new CreateMemberDTO("inss", "mail@mail.mail", "lastname","firstname","streetname","number","postcode","city","password", Role.valueOf(role));
             MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNr(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
 
-            MemberDTO answer = service.save(DUMMY_AUTH_KEY,createMemberDto);
+            MemberDTO answer = service.create(DUMMY_AUTH_KEY,createMemberDto);
 
             assertThat(answer).isEqualTo(memberDto);
         }
@@ -111,7 +111,7 @@ class MemberServiceTest {
         @DisplayName("Save an administrator without auth key")
         void saveAdmin_withoutAuth(String role) {
             CreateMemberDTO createMemberDto = new CreateMemberDTO("inss", "mail", "lastname","firstname","streetname","number","postcode","city","password", Role.valueOf(role));
-            assertThatThrownBy(() -> service.save(null, createMemberDto)).isInstanceOf(UnauthorizedException.class);
+            assertThatThrownBy(() -> service.create(null, createMemberDto)).isInstanceOf(UnauthorizedException.class);
         }
     }
 
