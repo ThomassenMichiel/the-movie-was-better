@@ -22,7 +22,6 @@ public class BookRentalController {
 
     @PostMapping()
     public BookRentalDTO lend(@RequestBody BookRentalDTO newRental){
-//        newRental.setDate(newRental.getReturnDate().plusWeeks(3));
         return service.create(newRental);
     }
 
@@ -38,21 +37,7 @@ public class BookRentalController {
 
     @GetMapping()
     @ResponseStatus(OK)
-    public List<BookRentalDTO> getAllBookRentals(@RequestParam Map<String, String> params) {
-        return service.findAll();
+    public List<BookRentalDTO> getAllBookRentals(@RequestHeader String authorization, @RequestParam Map<String, String> params) {
+        return service.findAll(authorization, params);
     }
-
-//    @GetMapping("getallrentalsbymember")
-//    @ResponseStatus(OK)
-//    public List<BookRentalDTO> getAllBookRentalsByMember(@RequestHeader String authorization, @RequestParam Member member) {
-//        securityService.validateAuthorization(authorization, GET_ALL_USERS);
-//        return service.getAllBookRentalsByMember(member);
-//            }
-//
-//    @GetMapping("getallrentalsdue")
-//    @ResponseStatus(OK)
-//    public List<BookRentalDTO> getAllBookRentalsByDueDate(@RequestHeader String authorization) {
-//        securityService.validateAuthorization(authorization, GET_ALL_DUE_RENTALS);
-//        return service.getAllBookRentalsByDueDate();
-//    }
 }
