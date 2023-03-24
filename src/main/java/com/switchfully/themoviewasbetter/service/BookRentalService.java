@@ -42,10 +42,14 @@ public class BookRentalService {
         return mapper.toDto(bookRentalRepository.create(rentalToSave));
     }
 
-    public String delete(BookRentalDTO bookRentalToReturn) {
-        bookRentalRepository.delete(mapper.toDomain(bookRentalToReturn));
+    public BookRental findById(String id) {
+        return bookRentalRepository.findById(id);
+    }
+
+    public String delete(String id) {
+        BookRental bookRental = bookRentalRepository.delete(id);
         String message = "Thank you for returning this book.";
-        if (bookRentalToReturn.getReturnDate().isBefore(LocalDate.now())){
+        if (bookRental.getReturnDate().isBefore(LocalDate.now())){
             message = "You are late in returning this book!";
         }
         return message;
