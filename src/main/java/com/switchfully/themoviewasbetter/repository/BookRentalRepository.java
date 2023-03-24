@@ -26,8 +26,8 @@ public class BookRentalRepository {
         return bookRental;
     }
 
-    public void delete(BookRental bookRental) {
-        repository.remove(bookRental.getId());
+    public BookRental delete(String id) {
+        return repository.remove(id);
     }
 
     public List<BookRental> findAll(Map<String, String> params) {
@@ -40,6 +40,7 @@ public class BookRentalRepository {
         }
         return rentals.toList();
     }
+
     public BookRental findById(String id) {
         return repository.get(id);
     }

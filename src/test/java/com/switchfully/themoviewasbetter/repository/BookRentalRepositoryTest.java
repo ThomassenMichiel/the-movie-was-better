@@ -43,7 +43,7 @@ class BookRentalRepositoryTest {
     @DisplayName("Delete")
     void delete() {
         BookRental aBook = new BookRental("0", new Member(), new Book("a book", "", "", "", ""), LocalDate.of(1990,10,10));
-        repository.delete(aBook);
+        repository.delete(aBook.getId());
         assertThat(repository.findAll(new HashMap<>())).isEmpty();
     }
 }

@@ -28,9 +28,8 @@ public class BookRentalController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
-    //by id, zoals getRentedBook
-    public ReturnedBookRentalDTO delete(@RequestBody BookRentalDTO bookRentalToReturn){
-        return new ReturnedBookRentalDTO(service.delete(bookRentalToReturn));
+    public ReturnedBookRentalDTO delete(@PathVariable String id){
+        return new ReturnedBookRentalDTO(service.delete(id));
     }
     @GetMapping("/{isbn}")
     @ResponseStatus(OK)

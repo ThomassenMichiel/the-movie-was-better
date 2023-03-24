@@ -9,11 +9,11 @@ import com.switchfully.themoviewasbetter.security.SecurityService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.switchfully.themoviewasbetter.security.Feature.*;
+import static com.switchfully.themoviewasbetter.security.Feature.GET_ALL_DUE_RENTALS;
+import static com.switchfully.themoviewasbetter.security.Feature.GET_ALL_RENTALS;
 
 @Service
 public class BookRentalService {
@@ -43,17 +43,16 @@ public class BookRentalService {
         return mapper.toDto(bookRentalRepository.create(rentalToSave));
     }
 
-    public RentedBookDTO find(String isbn){
+    public RentedBookDTO find(String isbn) {
 
         return mapper.toRentedBookDTO(bookRentalRepository.findById(isbn));
 
     }
 
-
-    public String delete(BookRentalDTO bookRentalToReturn) {
-        bookRentalRepository.delete(mapper.toDomain(bookRentalToReturn));
+    public String delete(String id) {
+        BookRental bookRental = bookRentalRepository.delete(id);
         String message = "Thank you for returning this book.";
-        if (bookRentalToReturn.getReturnDate().isBefore(LocalDate.now())){
+        if (bookRental.getReturnDate().isBefore(LocalDate.now())) {
             message = "You are late in returning this book!";
         }
         return message;
