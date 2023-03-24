@@ -3,107 +3,67 @@ package com.switchfully.themoviewasbetter.dto;
 import com.switchfully.themoviewasbetter.security.Role;
 
 public class CreateMemberDTO {
+    private final String inss;
+    private final String email;
+    private final String lastname;
+    private final String firstname;
+    private final String streetName;
+    private final String nr;
+    private final String postcode;
+    private final String city; // not null
+    private final String password;
+    private final Role role;
 
-    private String id;
-    private String inss;
-    private String email;
-    private String lastname;
-    private String firstname;
-    private String streetName;
-    private String nr;
-    private String postcode;
-    private String city; // not null
-    private String password;
-    private Role role;
-
-    public CreateMemberDTO() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public CreateMemberDTO(String inss, String email, String lastname, String firstname, String streetName, String nr, String postcode, String city, String password, Role role) {
+        this.inss = inss;
+        this.email = email;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.streetName = streetName;
+        this.nr = nr;
+        this.postcode = postcode;
+        this.city = city;
+        this.password = password;
+        this.role = role;
     }
 
     public String getInss() {
         return inss;
     }
 
-    public void setInss(String inss) {
-        this.inss = inss;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getFirstname() {
         return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
     }
 
     public String getStreetName() {
         return streetName;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
     public String getNr() {
         return nr;
-    }
-
-    public void setNr(String nr) {
-        this.nr = nr;
     }
 
     public String getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Role getRole() {
         return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

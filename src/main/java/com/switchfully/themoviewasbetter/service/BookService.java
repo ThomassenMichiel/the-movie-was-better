@@ -20,8 +20,8 @@ public class BookService {
         this.mapper = mapper;
     }
 
-    public List<BookDTO> getAllBooks(Map<String, String> params) {
-        return bookRepository.getAllBooks(params).stream().map(mapper::toDto).toList();
+    public List<BookDTO> findAll(Map<String, String> params) {
+        return bookRepository.findAllBooks(params).stream().map(mapper::toDto).toList();
     }
 
     public BookDTO findByIsbn(String isbn) {

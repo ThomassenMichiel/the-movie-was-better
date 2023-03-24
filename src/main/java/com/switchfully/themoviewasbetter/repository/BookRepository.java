@@ -31,7 +31,7 @@ public class BookRepository {
         repository.put(theComingStorm.getIsbn(), theComingStorm);
     }
 
-    public List<Book> getAllBooks(Map<String, String> params) {
+    public List<Book> findAllBooks(Map<String, String> params) {
         Stream<Book> bookStream = repository.values()
                 .stream();
         if (params.containsKey("isbn")) {

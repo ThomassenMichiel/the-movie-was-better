@@ -20,16 +20,14 @@ public class BookController {
 
     @GetMapping
     @ResponseStatus(OK)
-    public List<BookDTO> getAllBooks(@RequestParam Map<String, String> params) {
-        return bookService.getAllBooks(params);
+    public List<BookDTO> findAllBooks(@RequestParam Map<String, String> params) {
+        return bookService.findAll(params);
     }
 
-    //TODO: Show if book is lent out and who lent the book in details - Story 15 expansion
     @GetMapping("/{isbn}")
     @ResponseStatus(OK)
     public BookDTO getBookDetails(@PathVariable String isbn){
         return bookService.findByIsbn(isbn);
-
     }
 
 

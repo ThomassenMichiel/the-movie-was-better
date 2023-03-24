@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 
-import static java.lang.String.format;
-
 @Service
 public class SecurityService {
-    private final Logger logger = LoggerFactory.getLogger(SecurityService.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MemberRepository memberRepository;
 
@@ -24,36 +22,36 @@ public class SecurityService {
     }
 
     public void validateAuthorization(String authorization, Feature feature) {
-        Credentials emailPassword = getUsernamePassword(authorization);
-        Member user = memberRepository.getMember(emailPassword.getEmail());
+        Credentials emailPassword = getCredentials(authorization);
+        Member user = memberRepository.findById(emailPassword.getEmail());
 
         if (user == null) {
-            logger.error(format("Unknown user %s", emailPassword.getEmail()));
+            logger.error("Unknown user {}", emailPassword.getEmail());
             throw new UnknownUserException();
         }
         if (!user.doesPasswordMatch(emailPassword.getPassword())) {
-            logger.error(format("Password does not match for user %s", emailPassword.getEmail()));
+            logger.error("Password does not match for user {}", emailPassword.getEmail());
             throw new WrongPasswordException();
         }
         if (!user.canHaveAccessTo(feature)) {
-            logger.error(format("User %s does not have access to %s", emailPassword.getEmail(), feature));
+            logger.error("User {} does not have access to {}", emailPassword.getEmail(), feature);
             throw new UnauthorizedException();
         }
     }
 
-    private Credentials getUsernamePassword(String authorization) {
+    private Credentials getCredentials(String authorization) {
         try {
             String decodedUsernameAndPassword = new String(Base64.getDecoder()
                     .decode(authorization.substring("".length())));
-            logger.error("decodedUsernameAndPassword: " + decodedUsernameAndPassword);
+            logger.error("decodedUsernameAndPassword: {}", decodedUsernameAndPassword);
             String username = decodedUsernameAndPassword
                     .substring(0, decodedUsernameAndPassword.indexOf(":"));
-            logger.error("username: " + username);
+            logger.error("username: {}", username);
             String password = decodedUsernameAndPassword
                     .substring(decodedUsernameAndPassword.indexOf(":") + 1);
-            logger.error("password: " + password);
+            logger.error("password: {}", password);
             return new Credentials(username, password);
-        } catch (IllegalArgumentException iae) {
+        } catch (IllegalArgumentException | NullPointerException ex) {
             throw new UnauthorizedException();
         }
 

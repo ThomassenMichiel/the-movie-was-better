@@ -11,13 +11,12 @@ import java.util.regex.Pattern;
 
 public class Member {
 
-    private String id; // counter +1?
     private String inss; //unique
     private String email; // unique + x.x@.x reg ex
     private String lastname; //not null
     private String firstname;
     private String streetName;
-    private String nr;
+    private String number;
     private String postcode;
     private String city; // not null
     private String password;
@@ -28,25 +27,26 @@ public class Member {
     public Member() {
     }
 
-    public Member(String id, String inss, String email, String lastname, String firstname, String streetName,
+    public Member(String inss, String email, String lastname, String firstname, String streetName,
                   String nr, String postcode, String city, String password) {
-        this.id = id;
+        this(inss, email,lastname, firstname, streetName, nr, postcode, city, password, Role.MEMBER);
+    }
+
+    public Member(String inss, String email, String lastname, String firstname, String streetName,
+                  String nr, String postcode, String city, String password, Role role) {
         checkInss(inss);
         checkEmail(email);
         checkLastname(lastname);
         this.firstname = firstname;
         this.streetName = streetName;
-        this.nr = nr;
+        this.number = nr;
         this.postcode = postcode;
         checkCity(city);
         this.password = password;
-        this.role = Role.MEMBER;
+        this.role = role;
     }
 
     // Getters
-    public String getId() {
-        return id;
-    }
 
     public String getInss() {
         return inss;
@@ -68,8 +68,8 @@ public class Member {
         return streetName;
     }
 
-    public String getNr() {
-        return nr;
+    public String getNumber() {
+        return number;
     }
 
     public String getPostcode() {
@@ -90,10 +90,6 @@ public class Member {
 
     // Setters
 
-    public Member setId(String id) {
-        this.id = id;
-        return this;
-    }
 
     public Member setInss(String inss) {
         this.inss = inss;
@@ -120,8 +116,8 @@ public class Member {
         return this;
     }
 
-    public Member setNr(String nr) {
-        this.nr = nr;
+    public Member setNumber(String number) {
+        this.number = number;
         return this;
     }
 

@@ -20,8 +20,6 @@ import static org.assertj.core.api.Assertions.*;
 
 class BookServiceTest {
     private BookService service;
-    private BookRepository repository;
-    private BookMapper mapper;
 
     @BeforeEach
     void setUp() {
@@ -29,15 +27,15 @@ class BookServiceTest {
     }
 
     @Test
-    @DisplayName("Get all books")
-    void getAllBooks() {
+    @DisplayName("find all books")
+    void findAllBooks() {
         Book harryPotter = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
         Book harryPotter2 = new Book("0747538492", "Harry Potter and the Chamber of Secrets", "J.K.", "Rowling", "A secret chamber opened");
         Book harryPotter3 = new Book("0747542155", "Harry Potter and the Prisoner of Azkaban","J.K.", "Rowling", "Harry's been naughty");
         Book fellowShipOfTheRing = new Book("9780345339706", "Lord of the Rings: Fellowship of the Ring", "J.R.R.", "Tolkien", "they're taking hobbits to isengard");
         Book theComingStorm = new Book("9781423100188", "The Coming Storm (Pirates of the Caribbean: Jack Sparrow, No. 1)", "Rob", "Kidd", "I've got a jar of dirt");
 
-        List<BookDTO> answer = service.getAllBooks(new HashMap<>());
+        List<BookDTO> answer = service.findAll(new HashMap<>());
 
         assertThat(answer).hasSize(5);
         assertThat(answer).extracting(BookDTO::getIsbn).contains(harryPotter.getIsbn(), harryPotter2.getIsbn(), harryPotter3.getIsbn(), fellowShipOfTheRing.getIsbn(), theComingStorm.getIsbn());

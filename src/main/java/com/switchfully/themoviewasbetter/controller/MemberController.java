@@ -6,11 +6,7 @@ import com.switchfully.themoviewasbetter.dto.MemberDTO;
 import com.switchfully.themoviewasbetter.exceptions.UnauthorizedException;
 import com.switchfully.themoviewasbetter.exceptions.UnknownUserException;
 import com.switchfully.themoviewasbetter.exceptions.WrongPasswordException;
-import com.switchfully.themoviewasbetter.security.Feature;
-import com.switchfully.themoviewasbetter.security.SecurityService;
 import com.switchfully.themoviewasbetter.service.MemberService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestHeaderException;
@@ -18,50 +14,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.switchfully.themoviewasbetter.security.Feature.GET_ALL_USERS;
-import static com.switchfully.themoviewasbetter.security.Feature.REGISTER_ADMIN;
-
 @RestController
 @RequestMapping("members")
 public class MemberController {
     private final MemberService memberService;
-    private final SecurityService securityService;
-    private final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
-    public MemberController(MemberService service, SecurityService securityService) {
+    public MemberController(MemberService service) {
         this.memberService = service;
-        this.securityService = securityService;
     }
 
     @GetMapping()
-    public List<MemberDTO> getAllMembers(@RequestHeader String authorization) {
-        securityService.validateAuthorization(authorization, GET_ALL_USERS);
-        return memberService.findAll();
+    public List<MemberDTO> findAll(@RequestHeader String authorization) {
+        return memberService.findAll(authorization);
     }
 
     @GetMapping(path = "/{id}")
-    public MemberDTO getMember(@PathVariable("id") String id) {
+    public MemberDTO findById(@PathVariable("id") String id) {
         return memberService.findById(id);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO saveMember(@RequestBody CreateMemberDTO newMember) {
-        return memberService.save(newMember);
-    }
-
-    @PostMapping("/admins")
-    @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO saveAdmin(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
-        securityService.validateAuthorization(authorization, REGISTER_ADMIN);
-        return memberService.saveAdmin(newMember);
-    }
-
-    @PostMapping("/librarians")
-    @ResponseStatus(HttpStatus.CREATED)
-    public MemberDTO saveLibrarian(@RequestBody MemberDTO newMember, @RequestHeader String authorization) {
-        securityService.validateAuthorization(authorization, REGISTER_ADMIN);
-        return memberService.saveLibrarian(newMember);
+    public MemberDTO create(@RequestHeader String authorization, @RequestBody CreateMemberDTO newMember) {
+        return memberService.create(authorization, newMember);
     }
 
     @ExceptionHandler({MissingRequestHeaderException.class})
