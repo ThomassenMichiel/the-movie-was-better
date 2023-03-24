@@ -42,10 +42,6 @@ public class BookRentalService {
         return mapper.toDto(bookRentalRepository.create(rentalToSave));
     }
 
-    public BookRental findById(String id) {
-        return bookRentalRepository.findById(id);
-    }
-
     public String delete(String id) {
         BookRental bookRental = bookRentalRepository.delete(id);
         String message = "Thank you for returning this book.";
