@@ -5,6 +5,7 @@ import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
 import com.switchfully.themoviewasbetter.dto.RentedBookDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
