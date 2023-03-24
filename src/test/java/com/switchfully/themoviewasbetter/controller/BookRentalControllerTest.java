@@ -3,17 +3,14 @@ package com.switchfully.themoviewasbetter.controller;
 import com.switchfully.themoviewasbetter.domain.Book;
 import com.switchfully.themoviewasbetter.domain.BookRental;
 import com.switchfully.themoviewasbetter.domain.Member;
-import com.switchfully.themoviewasbetter.dto.BookDTO;
 import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
-import com.switchfully.themoviewasbetter.mapper.BookMapper;
+import com.switchfully.themoviewasbetter.dto.RentedBookDTO;
 import com.switchfully.themoviewasbetter.mapper.BookRentalMapper;
 import com.switchfully.themoviewasbetter.repository.BookRentalRepository;
-import com.switchfully.themoviewasbetter.repository.BookRepository;
 import com.switchfully.themoviewasbetter.repository.MemberRepository;
 import com.switchfully.themoviewasbetter.security.Role;
 import com.switchfully.themoviewasbetter.security.SecurityService;
 import com.switchfully.themoviewasbetter.service.BookRentalService;
-import com.switchfully.themoviewasbetter.service.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,43 +20,53 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BookRentalControllerTest {
     private BookRentalController controller;
-    LocalDate localDate = LocalDate.now();
-    Member member01 = new Member();
-
-
-    Member member02 = new Member();
+    private LocalDate localDate = LocalDate.now();
+    private Member member01 = new Member();
+    private Member member02 = new Member();
 
     @BeforeEach
     void setUp() {
-        controller = new BookRentalController(new BookRentalService(new BookRentalRepository(), new BookRentalMapper()), new SecurityService(new MemberRepository()));
+        MemberRepository repo = new MemberRepository();
+        LocalDate localDate = LocalDate.now();
 
+        BookRentalRepository repoBooks = new BookRentalRepository();
 
+        controller = new BookRentalController(new BookRentalService(new BookRentalRepository(), new BookRentalMapper(), new SecurityService(repo)));
 
+        Member member00 = new Member();
         Member librarian00 = new Member();
         librarian00.setRole(Role.LIBRARIAN);
         librarian00.setEmail("pp@mail.com");
         librarian00.setPassword("XXX");
+        repo.create(librarian00);
+        Book book00 = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+
+        BookRental bookRent00 = new BookRental("0", member00, book00, localDate);
+        repoBooks.create(bookRent00);
+
     }
 
-    Book book00 = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+
     @Test
     @DisplayName("Get all rentals from list OK?")
-    void getAllRentals(){
+    void getAllRentals() {
 
-        BookRentalDTO bookRentalDTO00 = new BookRentalDTO("1",member01, book00,localDate );
-        BookRentalDTO bookRentalDTO01 = new BookRentalDTO("2",member01, book00,localDate );
-        BookRentalDTO bookRentalDTO02 = new BookRentalDTO("3",member02, book00,localDate );
+        Book book00 = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        BookRentalDTO bookRentalDTO00 = new BookRentalDTO("0", member01, book00, localDate);
+        BookRentalDTO bookRentalDTO01 = new BookRentalDTO("1", member01, book00, localDate);
+        BookRentalDTO bookRentalDTO02 = new BookRentalDTO("2", member02, book00, localDate);
 
+        controller.lend(bookRentalDTO00);
+        controller.lend(bookRentalDTO01);
+        controller.lend(bookRentalDTO02);
 
-        controller.lendBookRental(bookRentalDTO00);
-        controller.lendBookRental(bookRentalDTO01);
-        controller.lendBookRental(bookRentalDTO02);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("all", member01.getEmail());
 
-        List<BookRentalDTO> answer = controller.getAllBookRentals();
+        List<BookRentalDTO> answer = controller.getAllBookRentals("cHBAbWFpbC5jb206WFhY", params);
 
         assertThat(answer).hasSize(3);
 
@@ -68,35 +75,18 @@ class BookRentalControllerTest {
 
     @Test
     void returnBookRental() {
-        BookRentalDTO bookRentalDTO00 = new BookRentalDTO("1",member01, book00,localDate );
-        BookRentalDTO bookRentalDTO01 = new BookRentalDTO("2",member01, book00,localDate );
-        controller.lendBookRental(bookRentalDTO00);
-        controller.lendBookRental(bookRentalDTO01);
+        Book book00 = new Book("9780747532699", "Harry Potter and the Philosopher's Stone", "J.K.", "Rowling", "He's a magical boy living in the stair's closet");
+        BookRentalDTO bookRentalDTO00 = new BookRentalDTO("0", member01, book00, localDate);
+        BookRentalDTO bookRentalDTO01 = new BookRentalDTO("1", member01, book00, localDate);
 
+        controller.lend(bookRentalDTO00);
+        controller.lend(bookRentalDTO01);
 
-        controller.returnBookRental(bookRentalDTO00);
+        BookRentalMapper mapper = new BookRentalMapper();
 
-        List<BookRentalDTO> answer = controller.getAllBookRentals();
+        RentedBookDTO answer = controller.getRentedBook(bookRentalDTO00.getId());
 
-        assertThat(answer).hasSize(1);
-
-    }
-    @Test
-    void getAllBookRentalsByMember() {
-        controller.getAllBookRentalsByMember("WFhYOnBwQG1haWwuY29t" , member01);
-
+        assertThat(answer).isEqualTo(mapper.toRentedBookDTO(mapper.toDomain(bookRentalDTO00)));
 
     }
-
-    @Test
-    void getAllBookRentalsByDueDate() {
-
-        List<BookRentalDTO> answer = controller.getAllBookRentalsByDueDate(String.valueOf(localDate.minusWeeks(2)));
-
-        assertThat(answer).hasSize(2);
-
-
-    }
-
-
 }

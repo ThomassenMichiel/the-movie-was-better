@@ -40,4 +40,7 @@ public class BookRentalRepository {
         }
         return rentals.toList();
     }
+    public BookRental findById(String id) {
+        return repository.get(id);
+    }
 }

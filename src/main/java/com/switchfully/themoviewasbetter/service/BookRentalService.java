@@ -2,17 +2,18 @@ package com.switchfully.themoviewasbetter.service;
 
 import com.switchfully.themoviewasbetter.domain.BookRental;
 import com.switchfully.themoviewasbetter.dto.BookRentalDTO;
+import com.switchfully.themoviewasbetter.dto.RentedBookDTO;
 import com.switchfully.themoviewasbetter.mapper.BookRentalMapper;
 import com.switchfully.themoviewasbetter.repository.BookRentalRepository;
 import com.switchfully.themoviewasbetter.security.SecurityService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.switchfully.themoviewasbetter.security.Feature.GET_ALL_DUE_RENTALS;
-import static com.switchfully.themoviewasbetter.security.Feature.GET_ALL_USERS;
+import static com.switchfully.themoviewasbetter.security.Feature.*;
 
 @Service
 public class BookRentalService {
@@ -27,8 +28,8 @@ public class BookRentalService {
     }
 
     public List<BookRentalDTO> findAll(String authorization, Map<String, String> params) {
-        if (params.containsKey("member")) {
-            securityService.validateAuthorization(authorization, GET_ALL_USERS);
+        if (params.containsKey("all")) {
+            securityService.validateAuthorization(authorization, GET_ALL_RENTALS);
         }
         if (params.containsKey("rentalsDue")) {
             securityService.validateAuthorization(authorization, GET_ALL_DUE_RENTALS);
@@ -41,6 +42,13 @@ public class BookRentalService {
         BookRental rentalToSave = mapper.toDomain(newRental);
         return mapper.toDto(bookRentalRepository.create(rentalToSave));
     }
+
+    public RentedBookDTO find(String isbn){
+
+        return mapper.toRentedBookDTO(bookRentalRepository.findById(isbn));
+
+    }
+
 
     public String delete(BookRentalDTO bookRentalToReturn) {
         bookRentalRepository.delete(mapper.toDomain(bookRentalToReturn));
