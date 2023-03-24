@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -23,7 +24,8 @@ class BookRentalRepositoryTest {
     @DisplayName("Find all")
     void findAll() {
         BookRental aBook = new BookRental("0", new Member(), new Book("a book", "", "", "", ""), LocalDate.of(1990,10,10));
-        assertThat(repository.findAll()).contains(aBook);
+
+        assertThat(repository.findAll(new HashMap<>())).contains(aBook);
     }
 
     @Test
@@ -34,7 +36,7 @@ class BookRentalRepositoryTest {
 
         repository.create(notMaBook);
 
-        assertThat(repository.findAll()).contains(aBook, notMaBook);
+        assertThat(repository.findAll(new HashMap<>())).contains(aBook, notMaBook);
     }
 
     @Test
@@ -42,6 +44,6 @@ class BookRentalRepositoryTest {
     void delete() {
         BookRental aBook = new BookRental("0", new Member(), new Book("a book", "", "", "", ""), LocalDate.of(1990,10,10));
         repository.delete(aBook);
-        assertThat(repository.findAll()).isEmpty();
+        assertThat(repository.findAll(new HashMap<>())).isEmpty();
     }
 }

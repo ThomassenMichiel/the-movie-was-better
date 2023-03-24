@@ -28,18 +28,18 @@ public class Member {
     }
 
     public Member(String inss, String email, String lastname, String firstname, String streetName,
-                  String nr, String postcode, String city, String password) {
-        this(inss, email,lastname, firstname, streetName, nr, postcode, city, password, Role.MEMBER);
+                  String number, String postcode, String city, String password) {
+        this(inss, email,lastname, firstname, streetName, number, postcode, city, password, Role.MEMBER);
     }
 
     public Member(String inss, String email, String lastname, String firstname, String streetName,
-                  String nr, String postcode, String city, String password, Role role) {
+                  String number, String postcode, String city, String password, Role role) {
         checkInss(inss);
         checkEmail(email);
         checkLastname(lastname);
         this.firstname = firstname;
         this.streetName = streetName;
-        this.number = nr;
+        this.number = number;
         this.postcode = postcode;
         checkCity(city);
         this.password = password;
