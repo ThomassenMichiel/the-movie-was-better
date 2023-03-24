@@ -66,7 +66,7 @@ class BookRentalControllerTest {
         HashMap<String, String> params = new HashMap<>();
         params.put("all", member01.getEmail());
 
-        List<BookRentalDTO> answer = controller.getAllBookRentals("cHBAbWFpbC5jb206WFhY", params);
+        List<BookRentalDTO> answer = controller.getAllBookRentals("BASIC cHBAbWFpbC5jb206WFhY", params);
 
         assertThat(answer).hasSize(3);
 
