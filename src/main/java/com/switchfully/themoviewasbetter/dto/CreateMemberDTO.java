@@ -8,7 +8,7 @@ public class CreateMemberDTO {
     private final String lastname;
     private final String firstname;
     private final String streetName;
-    private final String nr;
+    private final String number;
     private final String postcode;
     private final String city; // not null
     private final String password;
@@ -20,7 +20,7 @@ public class CreateMemberDTO {
         this.lastname = lastname;
         this.firstname = firstname;
         this.streetName = streetName;
-        this.nr = nr;
+        this.number = nr;
         this.postcode = postcode;
         this.city = city;
         this.password = password;
@@ -47,8 +47,8 @@ public class CreateMemberDTO {
         return streetName;
     }
 
-    public String getNr() {
-        return nr;
+    public String getNumber() {
+        return number;
     }
 
     public String getPostcode() {

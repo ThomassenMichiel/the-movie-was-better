@@ -70,7 +70,7 @@ class MemberServiceTest {
         @DisplayName("With auth key")
         void save() {
             CreateMemberDTO createMemberDto = new CreateMemberDTO("inss", "mail@mail.mail", "lastname","firstname","streetname","number","postcode","city","password", Role.MEMBER);
-            MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNr(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
+            MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNumber(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
 
             MemberDTO answer = service.create(DUMMY_AUTH_KEY,createMemberDto);
 
@@ -81,7 +81,7 @@ class MemberServiceTest {
         @DisplayName("Without auth key")
         void save_withoutAuth() {
             CreateMemberDTO createMemberDto = new CreateMemberDTO("inss", "mail@mail.mail", "lastname","firstname","streetname","number","postcode","city","password", Role.MEMBER);
-            MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNr(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
+            MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNumber(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
 
             MemberDTO answer = service.create(null,createMemberDto);
 
@@ -96,7 +96,7 @@ class MemberServiceTest {
         @DisplayName("Save an administrator")
         void saveAdmin(String role) {
             CreateMemberDTO createMemberDto = new CreateMemberDTO("inss", "mail@mail.mail", "lastname","firstname","streetname","number","postcode","city","password", Role.valueOf(role));
-            MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNr(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
+            MemberDTO memberDto = new MemberDTO(createMemberDto.getEmail(), createMemberDto.getLastname(), createMemberDto.getFirstname(), createMemberDto.getStreetName(), createMemberDto.getNumber(), createMemberDto.getPostcode(), createMemberDto.getCity(), createMemberDto.getRole());
 
             MemberDTO answer = service.create(DUMMY_AUTH_KEY,createMemberDto);
 
